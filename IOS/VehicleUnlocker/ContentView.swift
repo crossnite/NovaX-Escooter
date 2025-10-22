@@ -5,7 +5,7 @@ struct ContentView: View {
     @State var hex = ""
 
     var body: some View {
-        NavigationStack {
+        NavigationView {
             VStack(spacing: 12) {
                 HStack {
                     TextField("Service UUID", text: $ble.serviceUUIDString).textFieldStyle(.roundedBorder)
@@ -40,10 +40,14 @@ struct ContentView: View {
                         }
                     }
                     Section("Logs") {
-                        ForEach(Array(ble.logs.enumerated()), id: \.offset) { _, l in Text(l).font(.system(.footnote, design: .monospaced)) }
+                        ForEach(ble.logs.indices, id: \.self) { i in
+                            Text(ble.logs[i])
+                                .font(.footnote)
+                        }
                     }
                 }
             }.padding().navigationTitle("Vehicle Unlocker")
         }
     }
 }
+
