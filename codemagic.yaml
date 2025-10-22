@@ -1,0 +1,41 @@
+workflows:
+  ios_unsigned:
+    name: iOS unsigned build
+    max_build_duration: 60
+    environment:
+      xcode: 15.4
+    scripts:
+      - name: Archive (codesign disabled)
+        script: |
+          set -euo pipefail
+          xcodebuild -project IOS/VehicleUnlocker.xcodeproj \
+            -scheme VehicleUnlocker \
+            -configuration Release \
+            -destination 'generic/platform=iOS' \
+            CODE_SIGNING_ALLOWED=NO \
+            archive -archivePath $CM_BUILD_DIR/VehicleUnlocker.xcarchive
+      - name: Package unsigned .ipa
+        script: |
+          set -euo pipefail
+          APP_PATH="$CM_BUILD_DIR/VehicleUnlocker.xcarchive/Products/Applications/VehicleUnlocker.app"
+          PAYLOAD_DIR="$CM_BUILD_DIR/Payload"
+          mkdir -p "$PAYLOAD_DIR"
+          cp -R "$APP_PATH" "$PAYLOAD_DIR/"
+          cd "$CM_BUILD_DIR"
+          zip -r VehicleUnlocker.ipa Payload
+    artifacts:
+      - $CM_BUILD_DIR/VehicleUnlocker.ipa
+    publishing:
+      email:
+        recipients:
+          - $CM_EMAIL
+        notify:
+          success: true
+          failure: true
+    triggering:
+      events:
+        - start
+      branch_patterns:
+        - pattern: main
+          include: true
+          source: true
