@@ -34,7 +34,7 @@ workflows:
           failure: true
     triggering:
       events:
-        - start
+        - push
       branch_patterns:
         - pattern: main
           include: true
