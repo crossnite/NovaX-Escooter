@@ -7,6 +7,12 @@ struct ContentView: View {
     var body: some View {
         NavigationView {
             List {
+                Section("Target") {
+                    TextField("Auto-connect name contains", text: $ble.targetNameContains)
+                        .textFieldStyle(.roundedBorder)
+                        .autocorrectionDisabled(true)
+                        .textInputAutocapitalization(.never)
+                }
                 Section("Devices") {
                     HStack {
                         TextField("Optional scan filter (Service UUID)", text: $scanningFilter)
@@ -59,6 +65,34 @@ struct ContentView: View {
                     } else {
                         Text("Not connected")
                             .foregroundColor(.secondary)
+                    }
+                }
+
+                Section("Characteristics") {
+                    if ble.discoveredCharacteristics.isEmpty {
+                        Text("Run Discover to list characteristics.")
+                            .foregroundColor(.secondary)
+                    } else {
+                        ForEach(ble.discoveredCharacteristics, id: \.uuid) { ch in
+                            HStack {
+                                VStack(alignment: .leading) {
+                                    Text(ch.uuid.uuidString).font(.footnote)
+                                    Text(ch.properties.description)
+                                        .font(.caption2).foregroundColor(.secondary)
+                                }
+                                Spacer()
+                                Button("Set TX") { ble.setTX(uuid: ch.uuid.uuidString) }
+                                    .buttonStyle(.bordered)
+                                Button("Set RX") { ble.setRX(uuid: ch.uuid.uuidString) }
+                                    .buttonStyle(.bordered)
+                            }
+                        }
+                        if !ble.selectedTXUUID.isEmpty || !ble.selectedRXUUID.isEmpty {
+                            VStack(alignment: .leading, spacing: 4) {
+                                if !ble.selectedTXUUID.isEmpty { Text("TX: \(ble.selectedTXUUID)").font(.caption) }
+                                if !ble.selectedRXUUID.isEmpty { Text("RX: \(ble.selectedRXUUID)").font(.caption) }
+                            }
+                        }
                     }
                 }
 

@@ -11,6 +11,10 @@ class BLEManager: NSObject, ObservableObject {
     @Published var txUUIDString: String = ""
     @Published var rxUUIDString: String = ""
     @Published var rssiMap: [UUID: Int] = [:]
+    @Published var targetNameContains: String = "Nigeria187"
+    @Published var discoveredCharacteristics: [CBCharacteristic] = []
+    @Published var selectedTXUUID: String = ""
+    @Published var selectedRXUUID: String = ""
 
     private var central: CBCentralManager!
     private var txChar: CBCharacteristic?
@@ -67,8 +71,113 @@ class BLEManager: NSObject, ObservableObject {
 
     // Placeholder action sender to be wired with real payloads later
     func send(action name: String) {
-        // TODO: Replace with actual hex payloads and UUIDs when provided
-        append("action: \(name) (no payload set)")
+        ensureTXRXSelectedIfPossible()
+        switch name {
+        case "Unlock":
+            // Sequence derived from frames 730–748
+            // 1) AT+OKFCG=OKAI_CAR,0,0,1,0024$\r\n
+            writeAscii("AT+OKFCG=OKAI_CAR,0,0,1,0024$\r\n", withResponse: true)
+            // 2) AT+OKXWM=OKAI_CAR,1,0004$\r\n (frame 737)
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.10) {
+                self.writeAscii("AT+OKXWM=OKAI_CAR,1,0004$\r\n", withResponse: true)
+            }
+            // 3) AT+OKLFC=OKAI_CAR,0,1,1,1,3,0,1,1,0,0,2,0,ES520A-BT,1,0,0,0026$\r\n (frame 742)
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.20) {
+                self.writeAscii("AT+OKLFC=OKAI_CAR,0,1,1,1,3,0,1,1,0,0,2,0,ES520A-BT,1,0,0,0026$\r\n", withResponse: true)
+            }
+            // 4) AT+OKXWM=OKAI_CAR,0,0003$\r\n (frame 748)
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.30) {
+                self.writeAscii("AT+OKXWM=OKAI_CAR,0,0003$\r\n", withResponse: true)
+                self.append("action: Unlock sequence sent")
+            }
+        case "Lock":
+            // Minimal observed command turning XWM=0 with code 0003
+            writeAscii("AT+OKXWM=OKAI_CAR,0,0003$\r\n", withResponse: true)
+            append("action: Lock sent (XWM=0,0003)")
+        case "SendOKFCG":
+            writeAscii("AT+OKFCG=OKAI_CAR,0,0,1,0024$\r\n", withResponse: true)
+        case "SendXWM1":
+            writeAscii("AT+OKXWM=OKAI_CAR,1,0004$\r\n", withResponse: true)
+        case "SendLFC":
+            writeAscii("AT+OKLFC=OKAI_CAR,0,1,1,1,3,0,1,1,0,0,2,0,ES520A-BT,1,0,0,0026$\r\n", withResponse: true)
+        case "SendXWM0":
+            writeAscii("AT+OKXWM=OKAI_CAR,0,0003$\r\n", withResponse: true)
+        case "LightsOn":
+            append("action: LightsOn (payload needed)")
+        case "LightsOff":
+            append("action: LightsOff (payload needed)")
+        case "Horn":
+            append("action: Horn (payload needed)")
+        case "Ping":
+            append("action: Ping (payload needed)")
+        default:
+            append("action: \(name) (unknown)")
+        }
+    }
+
+    func setTX(uuid: String) {
+        selectedTXUUID = uuid
+        append("TX set to \(uuid)")
+        if let p = connected, let c = findCharacteristic(by: uuid, on: p) {
+            txChar = c
+        }
+    }
+
+    func setRX(uuid: String) {
+        selectedRXUUID = uuid
+        append("RX set to \(uuid)")
+        if let p = connected, let c = findCharacteristic(by: uuid, on: p) {
+            rxChar = c
+            p.setNotifyValue(true, for: c)
+        }
+    }
+
+    private func findCharacteristic(by uuidString: String, on peripheral: CBPeripheral) -> CBCharacteristic? {
+        let target = CBUUID(string: uuidString)
+        for s in peripheral.services ?? [] {
+            for ch in s.characteristics ?? [] {
+                if ch.uuid == target { return ch }
+            }
+        }
+        return nil
+    }
+
+    private func ensureTXRXSelectedIfPossible() {
+        guard let p = connected else { return }
+        if txChar == nil {
+            if let c = firstWritableCharacteristic(on: p) { txChar = c; append("auto TX -> \(c.uuid.uuidString)") }
+        }
+        if rxChar == nil {
+            if let c = firstNotifyingCharacteristic(on: p) { rxChar = c; p.setNotifyValue(true, for: c); append("auto RX -> \(c.uuid.uuidString)") }
+        }
+    }
+
+    private func firstWritableCharacteristic(on peripheral: CBPeripheral) -> CBCharacteristic? {
+        for s in peripheral.services ?? [] {
+            for ch in s.characteristics ?? [] {
+                let props = ch.properties
+                if props.contains(.write) || props.contains(.writeWithoutResponse) { return ch }
+            }
+        }
+        return nil
+    }
+
+    private func firstNotifyingCharacteristic(on peripheral: CBPeripheral) -> CBCharacteristic? {
+        for s in peripheral.services ?? [] {
+            for ch in s.characteristics ?? [] {
+                let props = ch.properties
+                if props.contains(.notify) || props.contains(.indicate) { return ch }
+            }
+        }
+        return nil
+    }
+
+    private func writeAscii(_ s: String, withResponse: Bool) {
+        guard let p = connected, let c = txChar else { return }
+        if let data = s.data(using: .utf8) {
+            p.writeValue(data, for: c, type: withResponse ? .withResponse : .withoutResponse)
+            append("write ascii \(s.trimmingCharacters(in: .whitespacesAndNewlines))")
+        }
     }
 
     func clearLogs() {
@@ -110,6 +219,10 @@ extension BLEManager: CBCentralManagerDelegate, CBPeripheralDelegate {
     func centralManager(_ central: CBCentralManager, didDiscover peripheral: CBPeripheral, advertisementData: [String : Any], rssi RSSI: NSNumber) {
         if !devices.contains(where: { $0.identifier == peripheral.identifier }) { devices.append(peripheral) }
         rssiMap[peripheral.identifier] = RSSI.intValue
+        let advName = (advertisementData[CBAdvertisementDataLocalNameKey] as? String) ?? peripheral.name ?? ""
+        if !advName.isEmpty, advName.localizedCaseInsensitiveContains(targetNameContains), connected == nil {
+            connect(peripheral)
+        }
     }
 
     func centralManager(_ central: CBCentralManager, didConnect peripheral: CBPeripheral) {
@@ -124,17 +237,23 @@ extension BLEManager: CBCentralManagerDelegate, CBPeripheralDelegate {
     }
 
     func peripheral(_ peripheral: CBPeripheral, didDiscoverServices error: Error?) {
-        let su = CBUUID(string: serviceUUIDString)
         guard let services = peripheral.services else { return }
-        for s in services where s.uuid == su { peripheral.discoverCharacteristics(nil, for: s) }
+        services.forEach { s in
+            append("service \(s.uuid.uuidString)")
+            peripheral.discoverCharacteristics(nil, for: s)
+        }
     }
 
     func peripheral(_ peripheral: CBPeripheral, didDiscoverCharacteristicsFor service: CBService, error: Error?) {
         let tx = CBUUID(string: txUUIDString)
         let rx = CBUUID(string: rxUUIDString)
         service.characteristics?.forEach { ch in
+            append("char \(service.uuid.uuidString) -> \(ch.uuid.uuidString)")
             if ch.uuid == tx { txChar = ch }
             if ch.uuid == rx { rxChar = ch; peripheral.setNotifyValue(true, for: ch) }
+            if !discoveredCharacteristics.contains(where: { $0.uuid == ch.uuid }) {
+                discoveredCharacteristics.append(ch)
+            }
         }
         append("chars ready")
     }
