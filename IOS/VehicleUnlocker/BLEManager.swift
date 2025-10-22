@@ -10,6 +10,7 @@ class BLEManager: NSObject, ObservableObject {
     @Published var serviceUUIDString: String = ""
     @Published var txUUIDString: String = ""
     @Published var rxUUIDString: String = ""
+    @Published var rssiMap: [UUID: Int] = [:]
 
     private var central: CBCentralManager!
     private var txChar: CBCharacteristic?
@@ -42,6 +43,8 @@ class BLEManager: NSObject, ObservableObject {
         if let p = connected { central.cancelPeripheralConnection(p) }
     }
 
+    var isConnected: Bool { connected != nil }
+
     func discover() {
         guard let p = connected else { return }
         let su = CBUUID(string: serviceUUIDString)
@@ -57,6 +60,34 @@ class BLEManager: NSObject, ObservableObject {
         append("write \(hex)")
     }
 
+    func clearLogs() {
+        logs.removeAll()
+    }
+
+    func startScan(serviceFilter: String?) {
+        isScanning = true
+        devices.removeAll()
+        if let f = serviceFilter, !f.isEmpty {
+            central.scanForPeripherals(withServices: [CBUUID(string: f)])
+            append("scan started (filter \(f))")
+        } else {
+            central.scanForPeripherals(withServices: nil)
+            append("scan started")
+        }
+    }
+
+    func enableAllNotifications() {
+        guard let p = connected else { return }
+        p.services?.forEach { s in
+            s.characteristics?.forEach { ch in
+                if ch.properties.contains(.notify) || ch.properties.contains(.indicate) {
+                    p.setNotifyValue(true, for: ch)
+                }
+            }
+        }
+        append("notifications enabled where available")
+    }
+
     private func append(_ s: String) { logs.append(s) }
 }
 
@@ -67,6 +98,7 @@ extension BLEManager: CBCentralManagerDelegate, CBPeripheralDelegate {
 
     func centralManager(_ central: CBCentralManager, didDiscover peripheral: CBPeripheral, advertisementData: [String : Any], rssi RSSI: NSNumber) {
         if !devices.contains(where: { $0.identifier == peripheral.identifier }) { devices.append(peripheral) }
+        rssiMap[peripheral.identifier] = RSSI.intValue
     }
 
     func centralManager(_ central: CBCentralManager, didConnect peripheral: CBPeripheral) {
