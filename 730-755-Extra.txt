@@ -1,0 +1,834 @@
+No.     Time           Source                Destination           Info
+    730 45.573394      SamsungElect_fa:73:81 (A54 von Emilek) f1:c3:10:70:43:b7 (Nigeria187) Sent Write Request, Handle: 0x0010 (GMAP Role: UGG Features)
+
+Frame 730: 43 bytes on wire (344 bits), 43 bytes captured (344 bits)
+Bluetooth
+    [Source: SamsungElect_fa:73:81 (64:17:cd:fa:73:81)]
+    [Destination: f1:c3:10:70:43:b7 (f1:c3:10:70:43:b7)]
+Bluetooth HCI H4
+    [Direction: Sent (0x00)]
+    HCI Packet Type: ACL Data (0x02)
+Bluetooth HCI ACL Packet
+    .... 0000 0000 0010 = Connection Handle: 0x002
+    ..00 .... .... .... = PB Flag: First Non-automatically Flushable Packet (0)
+    00.. .... .... .... = BC Flag: Point-To-Point (0)
+    Data Total Length: 38
+    Data
+    [Connect in frame: 575]
+    [Disconnect in frame: 1824]
+    [Source BD_ADDR: SamsungElect_fa:73:81 (64:17:cd:fa:73:81)]
+    [Source Device Name: A54 von Emilek]
+    [Source Role: Unknown (0)]
+    [Destination BD_ADDR: f1:c3:10:70:43:b7 (f1:c3:10:70:43:b7)]
+    [Destination Device Name: Nigeria187]
+    [Destination Role: Unknown (0)]
+    [Current Mode: Unknown (-1)]
+Bluetooth L2CAP Protocol
+    Length: 34
+    CID: Attribute Protocol (0x0004)
+Bluetooth Attribute Protocol
+    Opcode: Write Request (0x12)
+        0... .... = Authentication Signature: False
+        .0.. .... = Command: False
+        ..01 0010 = Method: Write Request (0x12)
+    Handle: 0x0010 (GMAP Role: UGG Features)
+        [Service UUID: GMAP Role (0x2c00)]
+        [UUID: UGG Features (0x2c01)]
+    Value: 41542b4f4b4643473d4f4b41495f4341522c302c302c312c30303234240d0a
+
+0000  02 02 00 26 00 22 00 04 00 12 10 00 41 54 2b 4f   ...&."......AT+O
+0010  4b 46 43 47 3d 4f 4b 41 49 5f 43 41 52 2c 30 2c   KFCG=OKAI_CAR,0,
+0020  30 2c 31 2c 30 30 32 34 24 0d 0a                  0,1,0024$..
+
+No.     Time           Source                Destination           Info
+    731 45.598096      controller            host                  Rcvd Number of Completed Packets
+
+Frame 731: 8 bytes on wire (64 bits), 8 bytes captured (64 bits)
+Bluetooth
+    [Source: controller]
+    [Destination: host]
+Bluetooth HCI H4
+    [Direction: Rcvd (0x01)]
+    HCI Packet Type: HCI Event (0x04)
+Bluetooth HCI Event - Number of Completed Packets
+
+0000  04 13 05 01 02 00 01 00                           ........
+
+No.     Time           Source                Destination           Info
+    732 45.627512      f1:c3:10:70:43:b7 (Nigeria187) SamsungElect_fa:73:81 (A54 von Emilek) Rcvd Write Response, Handle: 0x0010 (GMAP Role: UGG Features)
+
+Frame 732: 10 bytes on wire (80 bits), 10 bytes captured (80 bits)
+Bluetooth
+    [Source: f1:c3:10:70:43:b7 (f1:c3:10:70:43:b7)]
+    [Destination: SamsungElect_fa:73:81 (64:17:cd:fa:73:81)]
+Bluetooth HCI H4
+    [Direction: Rcvd (0x01)]
+    HCI Packet Type: ACL Data (0x02)
+Bluetooth HCI ACL Packet
+    .... 0000 0000 0010 = Connection Handle: 0x002
+    ..10 .... .... .... = PB Flag: First Automatically Flushable Packet (2)
+    00.. .... .... .... = BC Flag: Point-To-Point (0)
+    Data Total Length: 5
+    Data
+    [Connect in frame: 575]
+    [Disconnect in frame: 1824]
+    [Source BD_ADDR: f1:c3:10:70:43:b7 (f1:c3:10:70:43:b7)]
+    [Source Device Name: Nigeria187]
+    [Source Role: Unknown (0)]
+    [Destination BD_ADDR: SamsungElect_fa:73:81 (64:17:cd:fa:73:81)]
+    [Destination Device Name: A54 von Emilek]
+    [Destination Role: Unknown (0)]
+    [Current Mode: Unknown (-1)]
+Bluetooth L2CAP Protocol
+    Length: 1
+    CID: Attribute Protocol (0x0004)
+Bluetooth Attribute Protocol
+    Opcode: Write Response (0x13)
+        0... .... = Authentication Signature: False
+        .0.. .... = Command: False
+        ..01 0011 = Method: Write Response (0x13)
+    [Handle: 0x0010 (GMAP Role: UGG Features)]
+        [Service UUID: GMAP Role (0x2c00)]
+        [UUID: UGG Features (0x2c01)]
+    [Request in Frame: 730]
+
+0000  02 02 20 05 00 01 00 04 00 13                     .. .......
+
+No.     Time           Source                Destination           Info
+    733 45.627886      f1:c3:10:70:43:b7 (Nigeria187) SamsungElect_fa:73:81 (A54 von Emilek) Rcvd  [Reassembled in #736]
+
+Frame 733: 32 bytes on wire (256 bits), 32 bytes captured (256 bits)
+Bluetooth
+    [Source: f1:c3:10:70:43:b7 (f1:c3:10:70:43:b7)]
+    [Destination: SamsungElect_fa:73:81 (64:17:cd:fa:73:81)]
+Bluetooth HCI H4
+    [Direction: Rcvd (0x01)]
+    HCI Packet Type: ACL Data (0x02)
+Bluetooth HCI ACL Packet
+    .... 0000 0000 0010 = Connection Handle: 0x002
+    ..10 .... .... .... = PB Flag: First Automatically Flushable Packet (2)
+    00.. .... .... .... = BC Flag: Point-To-Point (0)
+    Data Total Length: 27
+    [This PDU is reassembled in frame: 736]
+    Data Fragment
+    [Connect in frame: 575]
+    [Disconnect in frame: 1824]
+    [Source BD_ADDR: f1:c3:10:70:43:b7 (f1:c3:10:70:43:b7)]
+    [Source Device Name: Nigeria187]
+    [Source Role: Unknown (0)]
+    [Destination BD_ADDR: SamsungElect_fa:73:81 (64:17:cd:fa:73:81)]
+    [Destination Device Name: A54 von Emilek]
+    [Destination Role: Unknown (0)]
+    [Current Mode: Unknown (-1)]
+
+0000  02 02 20 1b 00 39 00 04 00 1b 10 00 2b 41 43 4b   .. ..9......+ACK
+0010  3a 4f 4b 46 43 47 3d 30 2c 31 2c 31 2c 31 2c 31   :OKFCG=0,1,1,1,1
+
+No.     Time           Source                Destination           Info
+    734 45.628591      f1:c3:10:70:43:b7 (Nigeria187) SamsungElect_fa:73:81 (A54 von Emilek) Rcvd  [Continuation to #733] [Reassembled in #736]
+
+Frame 734: 32 bytes on wire (256 bits), 32 bytes captured (256 bits)
+Bluetooth
+    [Source: f1:c3:10:70:43:b7 (f1:c3:10:70:43:b7)]
+    [Destination: SamsungElect_fa:73:81 (64:17:cd:fa:73:81)]
+Bluetooth HCI H4
+    [Direction: Rcvd (0x01)]
+    HCI Packet Type: ACL Data (0x02)
+Bluetooth HCI ACL Packet
+    .... 0000 0000 0010 = Connection Handle: 0x002
+    ..01 .... .... .... = PB Flag: Continuing Fragment (1)
+    00.. .... .... .... = BC Flag: Point-To-Point (0)
+    Data Total Length: 27
+    [This is a continuation to the PDU in frame: 733]
+    [This PDU is reassembled in frame: 736]
+    Data Fragment
+    [Connect in frame: 575]
+    [Disconnect in frame: 1824]
+    [Source BD_ADDR: f1:c3:10:70:43:b7 (f1:c3:10:70:43:b7)]
+    [Source Device Name: Nigeria187]
+    [Source Role: Unknown (0)]
+    [Destination BD_ADDR: SamsungElect_fa:73:81 (64:17:cd:fa:73:81)]
+    [Destination Device Name: A54 von Emilek]
+    [Destination Role: Unknown (0)]
+    [Current Mode: Unknown (-1)]
+
+0000  02 02 10 1b 00 2c 30 2c 31 2c 31 2c 30 2c 30 2c   .....,0,1,1,0,0,
+0010  32 2c 30 2c 45 53 35 32 30 41 2d 42 54 2c 31 2c   2,0,ES520A-BT,1,
+
+No.     Time           Source                Destination           Info
+    735 45.628922      f1:c3:10:70:43:b7 (Nigeria187) SamsungElect_fa:73:81 (A54 von Emilek) Rcvd  [Continuation to #733] [Reassembled in #736]
+
+Frame 735: 9 bytes on wire (72 bits), 9 bytes captured (72 bits)
+Bluetooth
+    [Source: f1:c3:10:70:43:b7 (f1:c3:10:70:43:b7)]
+    [Destination: SamsungElect_fa:73:81 (64:17:cd:fa:73:81)]
+Bluetooth HCI H4
+    [Direction: Rcvd (0x01)]
+    HCI Packet Type: ACL Data (0x02)
+Bluetooth HCI ACL Packet
+    .... 0000 0000 0010 = Connection Handle: 0x002
+    ..01 .... .... .... = PB Flag: Continuing Fragment (1)
+    00.. .... .... .... = BC Flag: Point-To-Point (0)
+    Data Total Length: 4
+    [This is a continuation to the PDU in frame: 733]
+    [This PDU is reassembled in frame: 736]
+    Data Fragment
+    [Connect in frame: 575]
+    [Disconnect in frame: 1824]
+    [Source BD_ADDR: f1:c3:10:70:43:b7 (f1:c3:10:70:43:b7)]
+    [Source Device Name: Nigeria187]
+    [Source Role: Unknown (0)]
+    [Destination BD_ADDR: SamsungElect_fa:73:81 (64:17:cd:fa:73:81)]
+    [Destination Device Name: A54 von Emilek]
+    [Destination Role: Unknown (0)]
+    [Current Mode: Unknown (-1)]
+
+0000  02 02 10 04 00 30 30 32 34                        .....0024
+
+No.     Time           Source                Destination           Info
+    736 45.629303      f1:c3:10:70:43:b7 (Nigeria187) SamsungElect_fa:73:81 (A54 von Emilek) Rcvd Handle Value Notification, Handle: 0x0010 (GMAP Role: UGG Features)
+
+Frame 736: 8 bytes on wire (64 bits), 8 bytes captured (64 bits)
+Bluetooth
+    [Source: f1:c3:10:70:43:b7 (f1:c3:10:70:43:b7)]
+    [Destination: SamsungElect_fa:73:81 (64:17:cd:fa:73:81)]
+Bluetooth HCI H4
+    [Direction: Rcvd (0x01)]
+    HCI Packet Type: ACL Data (0x02)
+Bluetooth HCI ACL Packet
+    .... 0000 0000 0010 = Connection Handle: 0x002
+    ..01 .... .... .... = PB Flag: Continuing Fragment (1)
+    00.. .... .... .... = BC Flag: Point-To-Point (0)
+    Data Total Length: 3
+    [This is a continuation to the PDU in frame: 733]
+    Data Fragment
+    [Connect in frame: 575]
+    [Disconnect in frame: 1824]
+    [Source BD_ADDR: f1:c3:10:70:43:b7 (f1:c3:10:70:43:b7)]
+    [Source Device Name: Nigeria187]
+    [Source Role: Unknown (0)]
+    [Destination BD_ADDR: SamsungElect_fa:73:81 (64:17:cd:fa:73:81)]
+    [Destination Device Name: A54 von Emilek]
+    [Destination Role: Unknown (0)]
+    [Current Mode: Unknown (-1)]
+Bluetooth L2CAP Protocol
+    Length: 57
+    CID: Attribute Protocol (0x0004)
+Bluetooth Attribute Protocol
+    Opcode: Handle Value Notification (0x1b)
+        0... .... = Authentication Signature: False
+        .0.. .... = Command: False
+        ..01 1011 = Method: Handle Value Notification (0x1b)
+    Handle: 0x0010 (GMAP Role: UGG Features)
+        [Service UUID: GMAP Role (0x2c00)]
+        [UUID: UGG Features (0x2c01)]
+    Value: 2b41434b3a4f4b4643473d302c312c312c312c312c302c312c312c302c302c322c302c4553353230412d42542c312c30303234240d0a
+
+Frame (8 bytes):
+0000  02 02 10 03 00 24 0d 0a                           .....$..
+Reassembled BTHCI ACL (61 bytes):
+0000  39 00 04 00 1b 10 00 2b 41 43 4b 3a 4f 4b 46 43   9......+ACK:OKFC
+0010  47 3d 30 2c 31 2c 31 2c 31 2c 31 2c 30 2c 31 2c   G=0,1,1,1,1,0,1,
+0020  31 2c 30 2c 30 2c 32 2c 30 2c 45 53 35 32 30 41   1,0,0,2,0,ES520A
+0030  2d 42 54 2c 31 2c 30 30 32 34 24 0d 0a            -BT,1,0024$..
+
+No.     Time           Source                Destination           Info
+    737 45.639468      SamsungElect_fa:73:81 (A54 von Emilek) f1:c3:10:70:43:b7 (Nigeria187) Sent Write Request, Handle: 0x0010 (GMAP Role: UGG Features)
+
+Frame 737: 39 bytes on wire (312 bits), 39 bytes captured (312 bits)
+Bluetooth
+    [Source: SamsungElect_fa:73:81 (64:17:cd:fa:73:81)]
+    [Destination: f1:c3:10:70:43:b7 (f1:c3:10:70:43:b7)]
+Bluetooth HCI H4
+    [Direction: Sent (0x00)]
+    HCI Packet Type: ACL Data (0x02)
+Bluetooth HCI ACL Packet
+    .... 0000 0000 0010 = Connection Handle: 0x002
+    ..00 .... .... .... = PB Flag: First Non-automatically Flushable Packet (0)
+    00.. .... .... .... = BC Flag: Point-To-Point (0)
+    Data Total Length: 34
+    Data
+    [Connect in frame: 575]
+    [Disconnect in frame: 1824]
+    [Source BD_ADDR: SamsungElect_fa:73:81 (64:17:cd:fa:73:81)]
+    [Source Device Name: A54 von Emilek]
+    [Source Role: Unknown (0)]
+    [Destination BD_ADDR: f1:c3:10:70:43:b7 (f1:c3:10:70:43:b7)]
+    [Destination Device Name: Nigeria187]
+    [Destination Role: Unknown (0)]
+    [Current Mode: Unknown (-1)]
+Bluetooth L2CAP Protocol
+    Length: 30
+    CID: Attribute Protocol (0x0004)
+Bluetooth Attribute Protocol
+    Opcode: Write Request (0x12)
+        0... .... = Authentication Signature: False
+        .0.. .... = Command: False
+        ..01 0010 = Method: Write Request (0x12)
+    Handle: 0x0010 (GMAP Role: UGG Features)
+        [Service UUID: GMAP Role (0x2c00)]
+        [UUID: UGG Features (0x2c01)]
+    Value: 41542b4f4b58574d3d4f4b41495f4341522c312c30303034240d0a
+
+0000  02 02 00 22 00 1e 00 04 00 12 10 00 41 54 2b 4f   ..."........AT+O
+0010  4b 58 57 4d 3d 4f 4b 41 49 5f 43 41 52 2c 31 2c   KXWM=OKAI_CAR,1,
+0020  30 30 30 34 24 0d 0a                              0004$..
+
+No.     Time           Source                Destination           Info
+    738 45.687300      controller            host                  Rcvd Number of Completed Packets
+
+Frame 738: 8 bytes on wire (64 bits), 8 bytes captured (64 bits)
+Bluetooth
+    [Source: controller]
+    [Destination: host]
+Bluetooth HCI H4
+    [Direction: Rcvd (0x01)]
+    HCI Packet Type: HCI Event (0x04)
+Bluetooth HCI Event - Number of Completed Packets
+
+0000  04 13 05 01 02 00 01 00                           ........
+
+No.     Time           Source                Destination           Info
+    739 45.687827      f1:c3:10:70:43:b7 (Nigeria187) SamsungElect_fa:73:81 (A54 von Emilek) Rcvd Write Response, Handle: 0x0010 (GMAP Role: UGG Features)
+
+Frame 739: 10 bytes on wire (80 bits), 10 bytes captured (80 bits)
+Bluetooth
+    [Source: f1:c3:10:70:43:b7 (f1:c3:10:70:43:b7)]
+    [Destination: SamsungElect_fa:73:81 (64:17:cd:fa:73:81)]
+Bluetooth HCI H4
+    [Direction: Rcvd (0x01)]
+    HCI Packet Type: ACL Data (0x02)
+Bluetooth HCI ACL Packet
+    .... 0000 0000 0010 = Connection Handle: 0x002
+    ..10 .... .... .... = PB Flag: First Automatically Flushable Packet (2)
+    00.. .... .... .... = BC Flag: Point-To-Point (0)
+    Data Total Length: 5
+    Data
+    [Connect in frame: 575]
+    [Disconnect in frame: 1824]
+    [Source BD_ADDR: f1:c3:10:70:43:b7 (f1:c3:10:70:43:b7)]
+    [Source Device Name: Nigeria187]
+    [Source Role: Unknown (0)]
+    [Destination BD_ADDR: SamsungElect_fa:73:81 (64:17:cd:fa:73:81)]
+    [Destination Device Name: A54 von Emilek]
+    [Destination Role: Unknown (0)]
+    [Current Mode: Unknown (-1)]
+Bluetooth L2CAP Protocol
+    Length: 1
+    CID: Attribute Protocol (0x0004)
+Bluetooth Attribute Protocol
+    Opcode: Write Response (0x13)
+        0... .... = Authentication Signature: False
+        .0.. .... = Command: False
+        ..01 0011 = Method: Write Response (0x13)
+    [Handle: 0x0010 (GMAP Role: UGG Features)]
+        [Service UUID: GMAP Role (0x2c00)]
+        [UUID: UGG Features (0x2c01)]
+    [Request in Frame: 737]
+
+0000  02 02 20 05 00 01 00 04 00 13                     .. .......
+
+No.     Time           Source                Destination           Info
+    740 45.688590      f1:c3:10:70:43:b7 (Nigeria187) SamsungElect_fa:73:81 (A54 von Emilek) Rcvd  [Reassembled in #741]
+
+Frame 740: 32 bytes on wire (256 bits), 32 bytes captured (256 bits)
+Bluetooth
+    [Source: f1:c3:10:70:43:b7 (f1:c3:10:70:43:b7)]
+    [Destination: SamsungElect_fa:73:81 (64:17:cd:fa:73:81)]
+Bluetooth HCI H4
+    [Direction: Rcvd (0x01)]
+    HCI Packet Type: ACL Data (0x02)
+Bluetooth HCI ACL Packet
+    .... 0000 0000 0010 = Connection Handle: 0x002
+    ..10 .... .... .... = PB Flag: First Automatically Flushable Packet (2)
+    00.. .... .... .... = BC Flag: Point-To-Point (0)
+    Data Total Length: 27
+    [This PDU is reassembled in frame: 741]
+    Data Fragment
+    [Connect in frame: 575]
+    [Disconnect in frame: 1824]
+    [Source BD_ADDR: f1:c3:10:70:43:b7 (f1:c3:10:70:43:b7)]
+    [Source Device Name: Nigeria187]
+    [Source Role: Unknown (0)]
+    [Destination BD_ADDR: SamsungElect_fa:73:81 (64:17:cd:fa:73:81)]
+    [Destination Device Name: A54 von Emilek]
+    [Destination Role: Unknown (0)]
+    [Current Mode: Unknown (-1)]
+
+0000  02 02 20 1b 00 19 00 04 00 1b 10 00 2b 41 43 4b   .. .........+ACK
+0010  3a 4f 4b 58 57 4d 3d 31 2c 31 2c 30 30 30 34 24   :OKXWM=1,1,0004$
+
+No.     Time           Source                Destination           Info
+    741 45.689111      f1:c3:10:70:43:b7 (Nigeria187) SamsungElect_fa:73:81 (A54 von Emilek) Rcvd Handle Value Notification, Handle: 0x0010 (GMAP Role: UGG Features)
+
+Frame 741: 7 bytes on wire (56 bits), 7 bytes captured (56 bits)
+Bluetooth
+    [Source: f1:c3:10:70:43:b7 (f1:c3:10:70:43:b7)]
+    [Destination: SamsungElect_fa:73:81 (64:17:cd:fa:73:81)]
+Bluetooth HCI H4
+    [Direction: Rcvd (0x01)]
+    HCI Packet Type: ACL Data (0x02)
+Bluetooth HCI ACL Packet
+    .... 0000 0000 0010 = Connection Handle: 0x002
+    ..01 .... .... .... = PB Flag: Continuing Fragment (1)
+    00.. .... .... .... = BC Flag: Point-To-Point (0)
+    Data Total Length: 2
+    [This is a continuation to the PDU in frame: 740]
+    Data Fragment
+    [Connect in frame: 575]
+    [Disconnect in frame: 1824]
+    [Source BD_ADDR: f1:c3:10:70:43:b7 (f1:c3:10:70:43:b7)]
+    [Source Device Name: Nigeria187]
+    [Source Role: Unknown (0)]
+    [Destination BD_ADDR: SamsungElect_fa:73:81 (64:17:cd:fa:73:81)]
+    [Destination Device Name: A54 von Emilek]
+    [Destination Role: Unknown (0)]
+    [Current Mode: Unknown (-1)]
+Bluetooth L2CAP Protocol
+    Length: 25
+    CID: Attribute Protocol (0x0004)
+Bluetooth Attribute Protocol
+    Opcode: Handle Value Notification (0x1b)
+        0... .... = Authentication Signature: False
+        .0.. .... = Command: False
+        ..01 1011 = Method: Handle Value Notification (0x1b)
+    Handle: 0x0010 (GMAP Role: UGG Features)
+        [Service UUID: GMAP Role (0x2c00)]
+        [UUID: UGG Features (0x2c01)]
+    Value: 2b41434b3a4f4b58574d3d312c312c30303034240d0a
+
+Frame (7 bytes):
+0000  02 02 10 02 00 0d 0a                              .......
+Reassembled BTHCI ACL (29 bytes):
+0000  19 00 04 00 1b 10 00 2b 41 43 4b 3a 4f 4b 58 57   .......+ACK:OKXW
+0010  4d 3d 31 2c 31 2c 30 30 30 34 24 0d 0a            M=1,1,0004$..
+
+No.     Time           Source                Destination           Info
+    742 45.704723      SamsungElect_fa:73:81 (A54 von Emilek) f1:c3:10:70:43:b7 (Nigeria187) Sent Write Request, Handle: 0x0010 (GMAP Role: UGG Features)
+
+Frame 742: 77 bytes on wire (616 bits), 77 bytes captured (616 bits)
+Bluetooth
+    [Source: SamsungElect_fa:73:81 (64:17:cd:fa:73:81)]
+    [Destination: f1:c3:10:70:43:b7 (f1:c3:10:70:43:b7)]
+Bluetooth HCI H4
+    [Direction: Sent (0x00)]
+    HCI Packet Type: ACL Data (0x02)
+Bluetooth HCI ACL Packet
+    .... 0000 0000 0010 = Connection Handle: 0x002
+    ..00 .... .... .... = PB Flag: First Non-automatically Flushable Packet (0)
+    00.. .... .... .... = BC Flag: Point-To-Point (0)
+    Data Total Length: 72
+    Data
+    [Connect in frame: 575]
+    [Disconnect in frame: 1824]
+    [Source BD_ADDR: SamsungElect_fa:73:81 (64:17:cd:fa:73:81)]
+    [Source Device Name: A54 von Emilek]
+    [Source Role: Unknown (0)]
+    [Destination BD_ADDR: f1:c3:10:70:43:b7 (f1:c3:10:70:43:b7)]
+    [Destination Device Name: Nigeria187]
+    [Destination Role: Unknown (0)]
+    [Current Mode: Unknown (-1)]
+Bluetooth L2CAP Protocol
+    Length: 68
+    CID: Attribute Protocol (0x0004)
+Bluetooth Attribute Protocol
+    Opcode: Write Request (0x12)
+        0... .... = Authentication Signature: False
+        .0.. .... = Command: False
+        ..01 0010 = Method: Write Request (0x12)
+    Handle: 0x0010 (GMAP Role: UGG Features)
+        [Service UUID: GMAP Role (0x2c00)]
+        [UUID: UGG Features (0x2c01)]
+    Value: 41542b4f4b4c46433d4f4b41495f4341522c302c312c312c312c332c302c312c312c302c302c322c302c4553353230412d42542c312c302c302c30303236240d0a
+
+0000  02 02 00 48 00 44 00 04 00 12 10 00 41 54 2b 4f   ...H.D......AT+O
+0010  4b 4c 46 43 3d 4f 4b 41 49 5f 43 41 52 2c 30 2c   KLFC=OKAI_CAR,0,
+0020  31 2c 31 2c 31 2c 33 2c 30 2c 31 2c 31 2c 30 2c   1,1,1,3,0,1,1,0,
+0030  30 2c 32 2c 30 2c 45 53 35 32 30 41 2d 42 54 2c   0,2,0,ES520A-BT,
+0040  31 2c 30 2c 30 2c 30 30 32 36 24 0d 0a            1,0,0,0026$..
+
+No.     Time           Source                Destination           Info
+    743 45.718637      controller            host                  Rcvd Number of Completed Packets
+
+Frame 743: 8 bytes on wire (64 bits), 8 bytes captured (64 bits)
+Bluetooth
+    [Source: controller]
+    [Destination: host]
+Bluetooth HCI H4
+    [Direction: Rcvd (0x01)]
+    HCI Packet Type: HCI Event (0x04)
+Bluetooth HCI Event - Number of Completed Packets
+
+0000  04 13 05 01 02 00 01 00                           ........
+
+No.     Time           Source                Destination           Info
+    744 45.748502      f1:c3:10:70:43:b7 (Nigeria187) SamsungElect_fa:73:81 (A54 von Emilek) Rcvd Write Response, Handle: 0x0010 (GMAP Role: UGG Features)
+
+Frame 744: 10 bytes on wire (80 bits), 10 bytes captured (80 bits)
+Bluetooth
+    [Source: f1:c3:10:70:43:b7 (f1:c3:10:70:43:b7)]
+    [Destination: SamsungElect_fa:73:81 (64:17:cd:fa:73:81)]
+Bluetooth HCI H4
+    [Direction: Rcvd (0x01)]
+    HCI Packet Type: ACL Data (0x02)
+Bluetooth HCI ACL Packet
+    .... 0000 0000 0010 = Connection Handle: 0x002
+    ..10 .... .... .... = PB Flag: First Automatically Flushable Packet (2)
+    00.. .... .... .... = BC Flag: Point-To-Point (0)
+    Data Total Length: 5
+    Data
+    [Connect in frame: 575]
+    [Disconnect in frame: 1824]
+    [Source BD_ADDR: f1:c3:10:70:43:b7 (f1:c3:10:70:43:b7)]
+    [Source Device Name: Nigeria187]
+    [Source Role: Unknown (0)]
+    [Destination BD_ADDR: SamsungElect_fa:73:81 (64:17:cd:fa:73:81)]
+    [Destination Device Name: A54 von Emilek]
+    [Destination Role: Unknown (0)]
+    [Current Mode: Unknown (-1)]
+Bluetooth L2CAP Protocol
+    Length: 1
+    CID: Attribute Protocol (0x0004)
+Bluetooth Attribute Protocol
+    Opcode: Write Response (0x13)
+        0... .... = Authentication Signature: False
+        .0.. .... = Command: False
+        ..01 0011 = Method: Write Response (0x13)
+    [Handle: 0x0010 (GMAP Role: UGG Features)]
+        [Service UUID: GMAP Role (0x2c00)]
+        [UUID: UGG Features (0x2c01)]
+    [Request in Frame: 742]
+
+0000  02 02 20 05 00 01 00 04 00 13                     .. .......
+
+No.     Time           Source                Destination           Info
+    745 45.749062      f1:c3:10:70:43:b7 (Nigeria187) SamsungElect_fa:73:81 (A54 von Emilek) Rcvd  [Reassembled in #747]
+
+Frame 745: 32 bytes on wire (256 bits), 32 bytes captured (256 bits)
+Bluetooth
+    [Source: f1:c3:10:70:43:b7 (f1:c3:10:70:43:b7)]
+    [Destination: SamsungElect_fa:73:81 (64:17:cd:fa:73:81)]
+Bluetooth HCI H4
+    [Direction: Rcvd (0x01)]
+    HCI Packet Type: ACL Data (0x02)
+Bluetooth HCI ACL Packet
+    .... 0000 0000 0010 = Connection Handle: 0x002
+    ..10 .... .... .... = PB Flag: First Automatically Flushable Packet (2)
+    00.. .... .... .... = BC Flag: Point-To-Point (0)
+    Data Total Length: 27
+    [This PDU is reassembled in frame: 747]
+    Data Fragment
+    [Connect in frame: 575]
+    [Disconnect in frame: 1824]
+    [Source BD_ADDR: f1:c3:10:70:43:b7 (f1:c3:10:70:43:b7)]
+    [Source Device Name: Nigeria187]
+    [Source Role: Unknown (0)]
+    [Destination BD_ADDR: SamsungElect_fa:73:81 (64:17:cd:fa:73:81)]
+    [Destination Device Name: A54 von Emilek]
+    [Destination Role: Unknown (0)]
+    [Current Mode: Unknown (-1)]
+
+0000  02 02 20 1b 00 39 00 04 00 1b 10 00 2b 41 43 4b   .. ..9......+ACK
+0010  3a 4f 4b 4c 46 43 3d 30 2c 31 2c 31 2c 31 2c 33   :OKLFC=0,1,1,1,3
+
+No.     Time           Source                Destination           Info
+    746 45.749404      f1:c3:10:70:43:b7 (Nigeria187) SamsungElect_fa:73:81 (A54 von Emilek) Rcvd  [Continuation to #745] [Reassembled in #747]
+
+Frame 746: 32 bytes on wire (256 bits), 32 bytes captured (256 bits)
+Bluetooth
+    [Source: f1:c3:10:70:43:b7 (f1:c3:10:70:43:b7)]
+    [Destination: SamsungElect_fa:73:81 (64:17:cd:fa:73:81)]
+Bluetooth HCI H4
+    [Direction: Rcvd (0x01)]
+    HCI Packet Type: ACL Data (0x02)
+Bluetooth HCI ACL Packet
+    .... 0000 0000 0010 = Connection Handle: 0x002
+    ..01 .... .... .... = PB Flag: Continuing Fragment (1)
+    00.. .... .... .... = BC Flag: Point-To-Point (0)
+    Data Total Length: 27
+    [This is a continuation to the PDU in frame: 745]
+    [This PDU is reassembled in frame: 747]
+    Data Fragment
+    [Connect in frame: 575]
+    [Disconnect in frame: 1824]
+    [Source BD_ADDR: f1:c3:10:70:43:b7 (f1:c3:10:70:43:b7)]
+    [Source Device Name: Nigeria187]
+    [Source Role: Unknown (0)]
+    [Destination BD_ADDR: SamsungElect_fa:73:81 (64:17:cd:fa:73:81)]
+    [Destination Device Name: A54 von Emilek]
+    [Destination Role: Unknown (0)]
+    [Current Mode: Unknown (-1)]
+
+0000  02 02 10 1b 00 2c 30 2c 31 2c 31 2c 30 2c 30 2c   .....,0,1,1,0,0,
+0010  32 2c 30 2c 45 53 35 32 30 41 2d 42 54 2c 31 2c   2,0,ES520A-BT,1,
+
+No.     Time           Source                Destination           Info
+    747 45.749690      f1:c3:10:70:43:b7 (Nigeria187) SamsungElect_fa:73:81 (A54 von Emilek) Rcvd Handle Value Notification, Handle: 0x0010 (GMAP Role: UGG Features)
+
+Frame 747: 12 bytes on wire (96 bits), 12 bytes captured (96 bits)
+Bluetooth
+    [Source: f1:c3:10:70:43:b7 (f1:c3:10:70:43:b7)]
+    [Destination: SamsungElect_fa:73:81 (64:17:cd:fa:73:81)]
+Bluetooth HCI H4
+    [Direction: Rcvd (0x01)]
+    HCI Packet Type: ACL Data (0x02)
+Bluetooth HCI ACL Packet
+    .... 0000 0000 0010 = Connection Handle: 0x002
+    ..01 .... .... .... = PB Flag: Continuing Fragment (1)
+    00.. .... .... .... = BC Flag: Point-To-Point (0)
+    Data Total Length: 7
+    [This is a continuation to the PDU in frame: 745]
+    Data Fragment
+    [Connect in frame: 575]
+    [Disconnect in frame: 1824]
+    [Source BD_ADDR: f1:c3:10:70:43:b7 (f1:c3:10:70:43:b7)]
+    [Source Device Name: Nigeria187]
+    [Source Role: Unknown (0)]
+    [Destination BD_ADDR: SamsungElect_fa:73:81 (64:17:cd:fa:73:81)]
+    [Destination Device Name: A54 von Emilek]
+    [Destination Role: Unknown (0)]
+    [Current Mode: Unknown (-1)]
+Bluetooth L2CAP Protocol
+    Length: 57
+    CID: Attribute Protocol (0x0004)
+Bluetooth Attribute Protocol
+    Opcode: Handle Value Notification (0x1b)
+        0... .... = Authentication Signature: False
+        .0.. .... = Command: False
+        ..01 1011 = Method: Handle Value Notification (0x1b)
+    Handle: 0x0010 (GMAP Role: UGG Features)
+        [Service UUID: GMAP Role (0x2c00)]
+        [UUID: UGG Features (0x2c01)]
+    Value: 2b41434b3a4f4b4c46433d302c312c312c312c332c302c312c312c302c302c322c302c4553353230412d42542c312c30303236240d0a
+
+Frame (12 bytes):
+0000  02 02 10 07 00 30 30 32 36 24 0d 0a               .....0026$..
+Reassembled BTHCI ACL (61 bytes):
+0000  39 00 04 00 1b 10 00 2b 41 43 4b 3a 4f 4b 4c 46   9......+ACK:OKLF
+0010  43 3d 30 2c 31 2c 31 2c 31 2c 33 2c 30 2c 31 2c   C=0,1,1,1,3,0,1,
+0020  31 2c 30 2c 30 2c 32 2c 30 2c 45 53 35 32 30 41   1,0,0,2,0,ES520A
+0030  2d 42 54 2c 31 2c 30 30 32 36 24 0d 0a            -BT,1,0026$..
+
+No.     Time           Source                Destination           Info
+    748 45.757915      SamsungElect_fa:73:81 (A54 von Emilek) f1:c3:10:70:43:b7 (Nigeria187) Sent Write Request, Handle: 0x0010 (GMAP Role: UGG Features)
+
+Frame 748: 39 bytes on wire (312 bits), 39 bytes captured (312 bits)
+Bluetooth
+    [Source: SamsungElect_fa:73:81 (64:17:cd:fa:73:81)]
+    [Destination: f1:c3:10:70:43:b7 (f1:c3:10:70:43:b7)]
+Bluetooth HCI H4
+    [Direction: Sent (0x00)]
+    HCI Packet Type: ACL Data (0x02)
+Bluetooth HCI ACL Packet
+    .... 0000 0000 0010 = Connection Handle: 0x002
+    ..00 .... .... .... = PB Flag: First Non-automatically Flushable Packet (0)
+    00.. .... .... .... = BC Flag: Point-To-Point (0)
+    Data Total Length: 34
+    Data
+    [Connect in frame: 575]
+    [Disconnect in frame: 1824]
+    [Source BD_ADDR: SamsungElect_fa:73:81 (64:17:cd:fa:73:81)]
+    [Source Device Name: A54 von Emilek]
+    [Source Role: Unknown (0)]
+    [Destination BD_ADDR: f1:c3:10:70:43:b7 (f1:c3:10:70:43:b7)]
+    [Destination Device Name: Nigeria187]
+    [Destination Role: Unknown (0)]
+    [Current Mode: Unknown (-1)]
+Bluetooth L2CAP Protocol
+    Length: 30
+    CID: Attribute Protocol (0x0004)
+Bluetooth Attribute Protocol
+    Opcode: Write Request (0x12)
+        0... .... = Authentication Signature: False
+        .0.. .... = Command: False
+        ..01 0010 = Method: Write Request (0x12)
+    Handle: 0x0010 (GMAP Role: UGG Features)
+        [Service UUID: GMAP Role (0x2c00)]
+        [UUID: UGG Features (0x2c01)]
+    Value: 41542b4f4b58574d3d4f4b41495f4341522c302c30303033240d0a
+
+0000  02 02 00 22 00 1e 00 04 00 12 10 00 41 54 2b 4f   ..."........AT+O
+0010  4b 58 57 4d 3d 4f 4b 41 49 5f 43 41 52 2c 30 2c   KXWM=OKAI_CAR,0,
+0020  30 30 30 33 24 0d 0a                              0003$..
+
+No.     Time           Source                Destination           Info
+    749 45.758056      controller            host                  Rcvd LE Meta (LE Extended Advertising Report)
+
+Frame 749: 58 bytes on wire (464 bits), 58 bytes captured (464 bits)
+Bluetooth
+    [Source: controller]
+    [Destination: host]
+Bluetooth HCI H4
+    [Direction: Rcvd (0x01)]
+    HCI Packet Type: HCI Event (0x04)
+Bluetooth HCI Event - LE Meta
+
+0000  04 3e 37 0d 01 13 00 01 75 a4 bd dc ed 22 01 00   .>7.....u...."..
+0010  ff 7f ad 00 00 00 00 00 00 00 00 00 1d 02 01 02   ................
+0020  19 16 f1 fc 04 88 d1 9e 6e 35 23 4a 80 0c 14 fe   ........n5#J....
+0030  af 82 8f 7d 59 91 c0 a7 85 3a                     ...}Y....:
+
+No.     Time           Source                Destination           Info
+    750 45.759133      controller            host                  Rcvd LE Meta (LE Extended Advertising Report)
+
+Frame 750: 29 bytes on wire (232 bits), 29 bytes captured (232 bits)
+Bluetooth
+    [Source: controller]
+    [Destination: host]
+Bluetooth HCI H4
+    [Direction: Rcvd (0x01)]
+    HCI Packet Type: HCI Event (0x04)
+Bluetooth HCI Event - LE Meta
+
+0000  04 3e 1a 0d 01 1b 00 01 75 a4 bd dc ed 22 01 00   .>......u...."..
+0010  ff 7f ae 00 00 00 00 00 00 00 00 00 00            .............
+
+No.     Time           Source                Destination           Info
+    751 45.765582      controller            host                  Rcvd LE Meta (LE Extended Advertising Report)
+
+Frame 751: 125 bytes on wire (1000 bits), 125 bytes captured (1000 bits)
+Bluetooth
+    [Source: controller]
+    [Destination: host]
+Bluetooth HCI H4
+    [Direction: Rcvd (0x01)]
+    HCI Packet Type: HCI Event (0x04)
+Bluetooth HCI Event - LE Meta
+
+0000  04 3e 7a 0d 01 00 00 01 f5 39 3e 45 7b 33 01 01   .>z......9>E{3..
+0010  02 7f ad 00 00 00 00 00 00 00 00 00 60 5f 16 f3   ............`_..
+0020  fe 4a 17 23 55 47 4a 43 11 32 3c df 0f c3 9e 48   .J.#UGJC.2<....H
+0030  1b bd a3 e6 f8 64 37 39 ec 38 e4 25 02 3f a0 17   .....d79.8.%.?..
+0040  c7 45 bd 08 99 59 77 9a aa 46 0c 3e a0 be f5 27   .E...Yw..F.>...'
+0050  59 c2 b0 c9 53 74 33 bd b3 4b 1a b0 0c 4c 27 67   Y...St3..K...L'g
+0060  84 15 05 3f 00 00 84 15 06 21 00 00 84 15 04 7f   ...?.....!......
+0070  00 00 84 15 07 21 00 00 83 15 01 09 85            .....!.......
+
+No.     Time           Source                Destination           Info
+    752 45.777808      controller            host                  Rcvd Number of Completed Packets
+
+Frame 752: 8 bytes on wire (64 bits), 8 bytes captured (64 bits)
+Bluetooth
+    [Source: controller]
+    [Destination: host]
+Bluetooth HCI H4
+    [Direction: Rcvd (0x01)]
+    HCI Packet Type: HCI Event (0x04)
+Bluetooth HCI Event - Number of Completed Packets
+
+0000  04 13 05 01 02 00 01 00                           ........
+
+No.     Time           Source                Destination           Info
+    753 45.807149      f1:c3:10:70:43:b7 (Nigeria187) SamsungElect_fa:73:81 (A54 von Emilek) Rcvd Write Response, Handle: 0x0010 (GMAP Role: UGG Features)
+
+Frame 753: 10 bytes on wire (80 bits), 10 bytes captured (80 bits)
+Bluetooth
+    [Source: f1:c3:10:70:43:b7 (f1:c3:10:70:43:b7)]
+    [Destination: SamsungElect_fa:73:81 (64:17:cd:fa:73:81)]
+Bluetooth HCI H4
+    [Direction: Rcvd (0x01)]
+    HCI Packet Type: ACL Data (0x02)
+Bluetooth HCI ACL Packet
+    .... 0000 0000 0010 = Connection Handle: 0x002
+    ..10 .... .... .... = PB Flag: First Automatically Flushable Packet (2)
+    00.. .... .... .... = BC Flag: Point-To-Point (0)
+    Data Total Length: 5
+    Data
+    [Connect in frame: 575]
+    [Disconnect in frame: 1824]
+    [Source BD_ADDR: f1:c3:10:70:43:b7 (f1:c3:10:70:43:b7)]
+    [Source Device Name: Nigeria187]
+    [Source Role: Unknown (0)]
+    [Destination BD_ADDR: SamsungElect_fa:73:81 (64:17:cd:fa:73:81)]
+    [Destination Device Name: A54 von Emilek]
+    [Destination Role: Unknown (0)]
+    [Current Mode: Unknown (-1)]
+Bluetooth L2CAP Protocol
+    Length: 1
+    CID: Attribute Protocol (0x0004)
+Bluetooth Attribute Protocol
+    Opcode: Write Response (0x13)
+        0... .... = Authentication Signature: False
+        .0.. .... = Command: False
+        ..01 0011 = Method: Write Response (0x13)
+    [Handle: 0x0010 (GMAP Role: UGG Features)]
+        [Service UUID: GMAP Role (0x2c00)]
+        [UUID: UGG Features (0x2c01)]
+    [Request in Frame: 748]
+
+0000  02 02 20 05 00 01 00 04 00 13                     .. .......
+
+No.     Time           Source                Destination           Info
+    754 45.807917      f1:c3:10:70:43:b7 (Nigeria187) SamsungElect_fa:73:81 (A54 von Emilek) Rcvd  [Reassembled in #755]
+
+Frame 754: 32 bytes on wire (256 bits), 32 bytes captured (256 bits)
+Bluetooth
+    [Source: f1:c3:10:70:43:b7 (f1:c3:10:70:43:b7)]
+    [Destination: SamsungElect_fa:73:81 (64:17:cd:fa:73:81)]
+Bluetooth HCI H4
+    [Direction: Rcvd (0x01)]
+    HCI Packet Type: ACL Data (0x02)
+Bluetooth HCI ACL Packet
+    .... 0000 0000 0010 = Connection Handle: 0x002
+    ..10 .... .... .... = PB Flag: First Automatically Flushable Packet (2)
+    00.. .... .... .... = BC Flag: Point-To-Point (0)
+    Data Total Length: 27
+    [This PDU is reassembled in frame: 755]
+    Data Fragment
+    [Connect in frame: 575]
+    [Disconnect in frame: 1824]
+    [Source BD_ADDR: f1:c3:10:70:43:b7 (f1:c3:10:70:43:b7)]
+    [Source Device Name: Nigeria187]
+    [Source Role: Unknown (0)]
+    [Destination BD_ADDR: SamsungElect_fa:73:81 (64:17:cd:fa:73:81)]
+    [Destination Device Name: A54 von Emilek]
+    [Destination Role: Unknown (0)]
+    [Current Mode: Unknown (-1)]
+
+0000  02 02 20 1b 00 19 00 04 00 1b 10 00 2b 41 43 4b   .. .........+ACK
+0010  3a 4f 4b 58 57 4d 3d 31 2c 30 2c 30 30 30 33 24   :OKXWM=1,0,0003$
+
+No.     Time           Source                Destination           Info
+    755 45.808414      f1:c3:10:70:43:b7 (Nigeria187) SamsungElect_fa:73:81 (A54 von Emilek) Rcvd Handle Value Notification, Handle: 0x0010 (GMAP Role: UGG Features)
+
+Frame 755: 7 bytes on wire (56 bits), 7 bytes captured (56 bits)
+Bluetooth
+    [Source: f1:c3:10:70:43:b7 (f1:c3:10:70:43:b7)]
+    [Destination: SamsungElect_fa:73:81 (64:17:cd:fa:73:81)]
+Bluetooth HCI H4
+    [Direction: Rcvd (0x01)]
+    HCI Packet Type: ACL Data (0x02)
+Bluetooth HCI ACL Packet
+    .... 0000 0000 0010 = Connection Handle: 0x002
+    ..01 .... .... .... = PB Flag: Continuing Fragment (1)
+    00.. .... .... .... = BC Flag: Point-To-Point (0)
+    Data Total Length: 2
+    [This is a continuation to the PDU in frame: 754]
+    Data Fragment
+    [Connect in frame: 575]
+    [Disconnect in frame: 1824]
+    [Source BD_ADDR: f1:c3:10:70:43:b7 (f1:c3:10:70:43:b7)]
+    [Source Device Name: Nigeria187]
+    [Source Role: Unknown (0)]
+    [Destination BD_ADDR: SamsungElect_fa:73:81 (64:17:cd:fa:73:81)]
+    [Destination Device Name: A54 von Emilek]
+    [Destination Role: Unknown (0)]
+    [Current Mode: Unknown (-1)]
+Bluetooth L2CAP Protocol
+    Length: 25
+    CID: Attribute Protocol (0x0004)
+Bluetooth Attribute Protocol
+    Opcode: Handle Value Notification (0x1b)
+        0... .... = Authentication Signature: False
+        .0.. .... = Command: False
+        ..01 1011 = Method: Handle Value Notification (0x1b)
+    Handle: 0x0010 (GMAP Role: UGG Features)
+        [Service UUID: GMAP Role (0x2c00)]
+        [UUID: UGG Features (0x2c01)]
+    Value: 2b41434b3a4f4b58574d3d312c302c30303033240d0a
+
+Frame (7 bytes):
+0000  02 02 10 02 00 0d 0a                              .......
+Reassembled BTHCI ACL (29 bytes):
+0000  19 00 04 00 1b 10 00 2b 41 43 4b 3a 4f 4b 58 57   .......+ACK:OKXW
+0010  4d 3d 31 2c 30 2c 30 30 30 33 24 0d 0a            M=1,0,0003$..
