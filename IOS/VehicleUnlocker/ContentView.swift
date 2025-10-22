@@ -2,31 +2,20 @@ import SwiftUI
 
 struct ContentView: View {
     @StateObject var ble = BLEManager()
-    @State var hex = ""
-    @State var serviceFilter = ""
+    @State var scanningFilter = ""
 
     var body: some View {
         NavigationView {
             List {
-                Section("Setup") {
-                    VStack(alignment: .leading, spacing: 8) {
-                        TextField("Service UUID", text: $ble.serviceUUIDString)
-                            .textFieldStyle(.roundedBorder)
-                        TextField("TX Characteristic UUID", text: $ble.txUUIDString)
-                            .textFieldStyle(.roundedBorder)
-                        TextField("RX Characteristic UUID", text: $ble.rxUUIDString)
-                            .textFieldStyle(.roundedBorder)
-                    }
+                Section("Devices") {
                     HStack {
-                        TextField("Optional: Scan filter service UUID", text: $serviceFilter)
+                        TextField("Optional scan filter (Service UUID)", text: $scanningFilter)
                             .textFieldStyle(.roundedBorder)
                         Button(ble.isScanning ? "Stop" : "Scan") {
-                            if ble.isScanning { ble.stopScan() } else { ble.startScan(serviceFilter: serviceFilter) }
-                        }.buttonStyle(.borderedProminent)
+                            if ble.isScanning { ble.stopScan() } else { ble.startScan(serviceFilter: scanningFilter) }
+                        }
+                        .buttonStyle(.borderedProminent)
                     }
-                }
-
-                Section("Devices") {
                     if ble.devices.isEmpty {
                         Text("No devices yet. Tap Scan.")
                             .foregroundColor(.secondary)
@@ -59,7 +48,7 @@ struct ContentView: View {
                                 .font(.caption)
                                 .foregroundColor(.secondary)
                             HStack {
-                                Button("Discover Service") { ble.discover() }
+                                Button("Discover Service(s)") { ble.discover() }
                                     .buttonStyle(.borderedProminent)
                                 Button("Enable Notifications") { ble.enableAllNotifications() }
                                     .buttonStyle(.bordered)
@@ -73,14 +62,37 @@ struct ContentView: View {
                     }
                 }
 
-                Section("Send Hex") {
-                    HStack {
-                        TextField("e.g. A1B20304", text: $hex)
-                            .textFieldStyle(.roundedBorder)
-                        Button("Send") { ble.write(hex: hex) }
-                            .buttonStyle(.bordered)
+                Section("Actions") {
+                    if !ble.isConnected {
+                        Text("Connect to a device to use actions.")
+                            .foregroundColor(.secondary)
                     }
-                    .disabled(!ble.isConnected)
+                    VStack(spacing: 12) {
+                        HStack {
+                            Button("Unlock") { ble.send(action: "Unlock") }
+                                .buttonStyle(.borderedProminent)
+                                .disabled(!ble.isConnected)
+                            Button("Lock") { ble.send(action: "Lock") }
+                                .buttonStyle(.bordered)
+                                .disabled(!ble.isConnected)
+                        }
+                        HStack {
+                            Button("Lights On") { ble.send(action: "LightsOn") }
+                                .buttonStyle(.bordered)
+                                .disabled(!ble.isConnected)
+                            Button("Lights Off") { ble.send(action: "LightsOff") }
+                                .buttonStyle(.bordered)
+                                .disabled(!ble.isConnected)
+                        }
+                        HStack {
+                            Button("Horn") { ble.send(action: "Horn") }
+                                .buttonStyle(.bordered)
+                                .disabled(!ble.isConnected)
+                            Button("Ping") { ble.send(action: "Ping") }
+                                .buttonStyle(.bordered)
+                                .disabled(!ble.isConnected)
+                        }
+                    }
                 }
 
                 Section("Logs") {
@@ -88,7 +100,7 @@ struct ContentView: View {
                         Button("Clear Logs") { ble.clearLogs() }
                             .buttonStyle(.bordered)
                         Spacer()
-                        Text("\(ble.logs.count) entries")
+                        Text("\\(ble.logs.count) entries")
                             .font(.caption)
                             .foregroundColor(.secondary)
                     }

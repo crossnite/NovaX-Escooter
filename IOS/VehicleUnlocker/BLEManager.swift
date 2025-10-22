@@ -47,9 +47,14 @@ class BLEManager: NSObject, ObservableObject {
 
     func discover() {
         guard let p = connected else { return }
-        let su = CBUUID(string: serviceUUIDString)
-        p.discoverServices([su])
-        append("discover service \(serviceUUIDString)")
+        if serviceUUIDString.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty {
+            p.discoverServices(nil)
+            append("discover all services")
+        } else {
+            let su = CBUUID(string: serviceUUIDString)
+            p.discoverServices([su])
+            append("discover service \(serviceUUIDString)")
+        }
     }
 
     func write(hex: String) {
@@ -58,6 +63,12 @@ class BLEManager: NSObject, ObservableObject {
         guard data.count > 0 else { return }
         p.writeValue(data, for: c, type: .withoutResponse)
         append("write \(hex)")
+    }
+
+    // Placeholder action sender to be wired with real payloads later
+    func send(action name: String) {
+        // TODO: Replace with actual hex payloads and UUIDs when provided
+        append("action: \(name) (no payload set)")
     }
 
     func clearLogs() {
