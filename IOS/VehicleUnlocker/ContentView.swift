@@ -1,4 +1,5 @@
 import SwiftUI
+import CoreBluetooth
 
 struct ContentView: View {
     @StateObject var ble = BLEManager()
@@ -73,11 +74,11 @@ struct ContentView: View {
                         Text("Run Discover to list characteristics.")
                             .foregroundColor(.secondary)
                     } else {
-                        ForEach(ble.discoveredCharacteristics, id: \.uuid) { ch in
+                        ForEach(ble.discoveredCharacteristics, id: \.uuid.uuidString) { ch in
                             HStack {
                                 VStack(alignment: .leading) {
                                     Text(ch.uuid.uuidString).font(.footnote)
-                                    Text(ch.properties.description)
+                                    Text(propsString(ch.properties))
                                         .font(.caption2).foregroundColor(.secondary)
                                 }
                                 Spacer()
@@ -149,5 +150,18 @@ struct ContentView: View {
             .navigationTitle("Vehicle Unlocker")
         }
     }
+}
+
+private func propsString(_ p: CBCharacteristicProperties) -> String {
+    var parts: [String] = []
+    if p.contains(.read) { parts.append("read") }
+    if p.contains(.write) { parts.append("write") }
+    if p.contains(.writeWithoutResponse) { parts.append("writeNR") }
+    if p.contains(.notify) { parts.append("notify") }
+    if p.contains(.indicate) { parts.append("indicate") }
+    if p.contains(.broadcast) { parts.append("broadcast") }
+    if p.contains(.authenticatedSignedWrites) { parts.append("signed") }
+    if p.contains(.extendedProperties) { parts.append("extended") }
+    return parts.joined(separator: ", ")
 }
 
