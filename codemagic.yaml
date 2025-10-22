@@ -25,13 +25,6 @@ workflows:
           zip -r VehicleUnlocker.ipa Payload
     artifacts:
       - $CM_BUILD_DIR/VehicleUnlocker.ipa
-    publishing:
-      email:
-        recipients:
-          - $CM_EMAIL
-        notify:
-          success: true
-          failure: true
     triggering:
       events:
         - push
