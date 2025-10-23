@@ -1,0 +1,834 @@
+No.     Time           Source                Destination           Info
+    476 48.209799      f1:c3:10:70:43:b7 (Nigeria187) SamsungElect_fa:73:81 (A54 von Emilek) Rcvd Exchange MTU Request, Client Rx MTU: 247
+
+Frame 476: 12 bytes on wire (96 bits), 12 bytes captured (96 bits)
+Bluetooth
+Bluetooth HCI H4
+Bluetooth HCI ACL Packet
+Bluetooth L2CAP Protocol
+Bluetooth Attribute Protocol
+
+0000  02 02 20 07 00 03 00 04 00 02 f7 00               .. .........
+
+No.     Time           Source                Destination           Info
+    479 48.213099      SamsungElect_fa:73:81 (A54 von Emilek) f1:c3:10:70:43:b7 (Nigeria187) Sent Read By Type Request, Appearance, Handles: 0x0001..0xffff
+
+Frame 479: 16 bytes on wire (128 bits), 16 bytes captured (128 bits)
+Bluetooth
+Bluetooth HCI H4
+Bluetooth HCI ACL Packet
+Bluetooth L2CAP Protocol
+Bluetooth Attribute Protocol
+
+0000  02 02 00 0b 00 07 00 04 00 08 01 00 ff ff 01 2a   ...............*
+
+No.     Time           Source                Destination           Info
+    482 48.214256      SamsungElect_fa:73:81 (A54 von Emilek) f1:c3:10:70:43:b7 (Nigeria187) Sent Exchange MTU Response, Server Rx MTU: 517
+
+Frame 482: 12 bytes on wire (96 bits), 12 bytes captured (96 bits)
+Bluetooth
+Bluetooth HCI H4
+Bluetooth HCI ACL Packet
+Bluetooth L2CAP Protocol
+Bluetooth Attribute Protocol
+
+0000  02 02 00 07 00 03 00 04 00 03 05 02               ............
+
+No.     Time           Source                Destination           Info
+    504 48.299733      f1:c3:10:70:43:b7 (Nigeria187) SamsungElect_fa:73:81 (A54 von Emilek) Rcvd Read By Type Response, Attribute List Length: 1
+
+Frame 504: 15 bytes on wire (120 bits), 15 bytes captured (120 bits)
+Bluetooth
+Bluetooth HCI H4
+Bluetooth HCI ACL Packet
+Bluetooth L2CAP Protocol
+Bluetooth Attribute Protocol
+
+0000  02 02 20 0a 00 06 00 04 00 09 04 05 00 00 00      .. ............
+
+No.     Time           Source                Destination           Info
+    508 48.333553      SamsungElect_fa:73:81 (A54 von Emilek) f1:c3:10:70:43:b7 (Nigeria187) Sent Read By Type Request, Database Hash, Handles: 0x0001..0xffff
+
+Frame 508: 16 bytes on wire (128 bits), 16 bytes captured (128 bits)
+Bluetooth
+Bluetooth HCI H4
+Bluetooth HCI ACL Packet
+Bluetooth L2CAP Protocol
+Bluetooth Attribute Protocol
+
+0000  02 02 00 0b 00 07 00 04 00 08 01 00 ff ff 2a 2b   ..............*+
+
+No.     Time           Source                Destination           Info
+    514 48.389732      f1:c3:10:70:43:b7 (Nigeria187) SamsungElect_fa:73:81 (A54 von Emilek) Rcvd Error Response - Attribute Not Found, Handle: 0x0001 (Unknown)
+
+Frame 514: 14 bytes on wire (112 bits), 14 bytes captured (112 bits)
+Bluetooth
+Bluetooth HCI H4
+Bluetooth HCI ACL Packet
+Bluetooth L2CAP Protocol
+Bluetooth Attribute Protocol
+
+0000  02 02 20 09 00 05 00 04 00 01 08 01 00 0a         .. ...........
+
+No.     Time           Source                Destination           Info
+    516 48.392955      SamsungElect_fa:73:81 (A54 von Emilek) f1:c3:10:70:43:b7 (Nigeria187) Sent Read By Group Type Request, Primary Service, Handles: 0x0001..0xffff
+
+Frame 516: 16 bytes on wire (128 bits), 16 bytes captured (128 bits)
+Bluetooth
+Bluetooth HCI H4
+Bluetooth HCI ACL Packet
+Bluetooth L2CAP Protocol
+Bluetooth Attribute Protocol
+
+0000  02 02 00 0b 00 07 00 04 00 10 01 00 ff ff 00 28   ...............(
+
+No.     Time           Source                Destination           Info
+    523 48.479868      f1:c3:10:70:43:b7 (Nigeria187) SamsungElect_fa:73:81 (A54 von Emilek) Rcvd  [Reassembled in #524]
+
+Frame 523: 32 bytes on wire (256 bits), 32 bytes captured (256 bits)
+Bluetooth
+Bluetooth HCI H4
+Bluetooth HCI ACL Packet
+
+0000  02 02 20 1b 00 1a 00 04 00 11 06 01 00 09 00 00   .. .............
+0010  18 0a 00 0d 00 01 18 0e 00 14 00 00 2c 15 00 ff   ............,...
+
+No.     Time           Source                Destination           Info
+    524 48.480476      f1:c3:10:70:43:b7 (Nigeria187) SamsungElect_fa:73:81 (A54 von Emilek) Rcvd Read By Group Type Response, Attribute List Length: 4, GAP, GATT, GMAP Role, Nordic Semiconductor ASA
+
+Frame 524: 8 bytes on wire (64 bits), 8 bytes captured (64 bits)
+Bluetooth
+Bluetooth HCI H4
+Bluetooth HCI ACL Packet
+Bluetooth L2CAP Protocol
+Bluetooth Attribute Protocol
+
+Frame (8 bytes):
+0000  02 02 10 03 00 ff 59 fe                           ......Y.
+Reassembled BTHCI ACL (30 bytes):
+0000  1a 00 04 00 11 06 01 00 09 00 00 18 0a 00 0d 00   ................
+0010  01 18 0e 00 14 00 00 2c 15 00 ff ff 59 fe         .......,....Y.
+
+No.     Time           Source                Destination           Info
+    525 48.480935      SamsungElect_fa:73:81 (A54 von Emilek) f1:c3:10:70:43:b7 (Nigeria187) Sent Read By Type Request, Include, Handles: 0x0001..0x0009
+
+Frame 525: 16 bytes on wire (128 bits), 16 bytes captured (128 bits)
+Bluetooth
+Bluetooth HCI H4
+Bluetooth HCI ACL Packet
+Bluetooth L2CAP Protocol
+Bluetooth Attribute Protocol
+
+0000  02 02 00 0b 00 07 00 04 00 08 01 00 09 00 02 28   ...............(
+
+No.     Time           Source                Destination           Info
+    529 48.539808      f1:c3:10:70:43:b7 (Nigeria187) SamsungElect_fa:73:81 (A54 von Emilek) Rcvd Error Response - Attribute Not Found, Handle: 0x0001 (GAP)
+
+Frame 529: 14 bytes on wire (112 bits), 14 bytes captured (112 bits)
+Bluetooth
+Bluetooth HCI H4
+Bluetooth HCI ACL Packet
+Bluetooth L2CAP Protocol
+Bluetooth Attribute Protocol
+
+0000  02 02 20 09 00 05 00 04 00 01 08 01 00 0a         .. ...........
+
+No.     Time           Source                Destination           Info
+    530 48.540217      SamsungElect_fa:73:81 (A54 von Emilek) f1:c3:10:70:43:b7 (Nigeria187) Sent Read By Type Request, Characteristic, Handles: 0x0001..0x0009
+
+Frame 530: 16 bytes on wire (128 bits), 16 bytes captured (128 bits)
+Bluetooth
+Bluetooth HCI H4
+Bluetooth HCI ACL Packet
+Bluetooth L2CAP Protocol
+Bluetooth Attribute Protocol
+
+0000  02 02 00 0b 00 07 00 04 00 08 01 00 09 00 03 28   ...............(
+
+No.     Time           Source                Destination           Info
+    536 48.599968      f1:c3:10:70:43:b7 (Nigeria187) SamsungElect_fa:73:81 (A54 von Emilek) Rcvd  [Reassembled in #537]
+
+Frame 536: 32 bytes on wire (256 bits), 32 bytes captured (256 bits)
+Bluetooth
+Bluetooth HCI H4
+Bluetooth HCI ACL Packet
+
+0000  02 02 20 1b 00 1e 00 04 00 09 07 02 00 0a 03 00   .. .............
+0010  00 2a 04 00 02 05 00 01 2a 06 00 02 07 00 04 2a   .*......*......*
+
+No.     Time           Source                Destination           Info
+    537 48.607402      f1:c3:10:70:43:b7 (Nigeria187) SamsungElect_fa:73:81 (A54 von Emilek) Rcvd Read By Type Response, Attribute List Length: 4, Device Name, Appearance, Peripheral Preferred Connection Parameters, Central Address Resolution
+
+Frame 537: 12 bytes on wire (96 bits), 12 bytes captured (96 bits)
+Bluetooth
+Bluetooth HCI H4
+Bluetooth HCI ACL Packet
+Bluetooth L2CAP Protocol
+Bluetooth Attribute Protocol
+
+Frame (12 bytes):
+0000  02 02 10 07 00 08 00 02 09 00 a6 2a               ...........*
+Reassembled BTHCI ACL (34 bytes):
+0000  1e 00 04 00 09 07 02 00 0a 03 00 00 2a 04 00 02   ............*...
+0010  05 00 01 2a 06 00 02 07 00 04 2a 08 00 02 09 00   ...*......*.....
+0020  a6 2a                                             .*
+
+No.     Time           Source                Destination           Info
+    538 48.607766      SamsungElect_fa:73:81 (A54 von Emilek) f1:c3:10:70:43:b7 (Nigeria187) Sent Read By Type Request, Characteristic, Handles: 0x0009..0x0009
+
+Frame 538: 16 bytes on wire (128 bits), 16 bytes captured (128 bits)
+Bluetooth
+Bluetooth HCI H4
+Bluetooth HCI ACL Packet
+Bluetooth L2CAP Protocol
+Bluetooth Attribute Protocol
+
+0000  02 02 00 0b 00 07 00 04 00 08 09 00 09 00 03 28   ...............(
+
+No.     Time           Source                Destination           Info
+    540 48.622460      f1:c3:10:70:43:b7 (Nigeria187) SamsungElect_fa:73:81 (A54 von Emilek) Rcvd Error Response - Attribute Not Found, Handle: 0x0009 (GAP: Central Address Resolution)
+
+Frame 540: 14 bytes on wire (112 bits), 14 bytes captured (112 bits)
+Bluetooth
+Bluetooth HCI H4
+Bluetooth HCI ACL Packet
+Bluetooth L2CAP Protocol
+Bluetooth Attribute Protocol
+
+0000  02 02 20 09 00 05 00 04 00 01 08 09 00 0a         .. ...........
+
+No.     Time           Source                Destination           Info
+    541 48.623455      SamsungElect_fa:73:81 (A54 von Emilek) f1:c3:10:70:43:b7 (Nigeria187) Sent Read By Type Request, Include, Handles: 0x000a..0x000d
+
+Frame 541: 16 bytes on wire (128 bits), 16 bytes captured (128 bits)
+Bluetooth
+Bluetooth HCI H4
+Bluetooth HCI ACL Packet
+Bluetooth L2CAP Protocol
+Bluetooth Attribute Protocol
+
+0000  02 02 00 0b 00 07 00 04 00 08 0a 00 0d 00 02 28   ...............(
+
+No.     Time           Source                Destination           Info
+    543 48.637262      f1:c3:10:70:43:b7 (Nigeria187) SamsungElect_fa:73:81 (A54 von Emilek) Rcvd Error Response - Attribute Not Found, Handle: 0x000a (GATT)
+
+Frame 543: 14 bytes on wire (112 bits), 14 bytes captured (112 bits)
+Bluetooth
+Bluetooth HCI H4
+Bluetooth HCI ACL Packet
+Bluetooth L2CAP Protocol
+Bluetooth Attribute Protocol
+
+0000  02 02 20 09 00 05 00 04 00 01 08 0a 00 0a         .. ...........
+
+No.     Time           Source                Destination           Info
+    544 48.637803      SamsungElect_fa:73:81 (A54 von Emilek) f1:c3:10:70:43:b7 (Nigeria187) Sent Read By Type Request, Characteristic, Handles: 0x000a..0x000d
+
+Frame 544: 16 bytes on wire (128 bits), 16 bytes captured (128 bits)
+Bluetooth
+Bluetooth HCI H4
+Bluetooth HCI ACL Packet
+Bluetooth L2CAP Protocol
+Bluetooth Attribute Protocol
+
+0000  02 02 00 0b 00 07 00 04 00 08 0a 00 0d 00 03 28   ...............(
+
+No.     Time           Source                Destination           Info
+    547 48.652738      f1:c3:10:70:43:b7 (Nigeria187) SamsungElect_fa:73:81 (A54 von Emilek) Rcvd Read By Type Response, Attribute List Length: 1, Service Changed
+
+Frame 547: 18 bytes on wire (144 bits), 18 bytes captured (144 bits)
+Bluetooth
+Bluetooth HCI H4
+Bluetooth HCI ACL Packet
+Bluetooth L2CAP Protocol
+Bluetooth Attribute Protocol
+
+0000  02 02 20 0d 00 09 00 04 00 09 07 0b 00 20 0c 00   .. .......... ..
+0010  05 2a                                             .*
+
+No.     Time           Source                Destination           Info
+    548 48.653175      SamsungElect_fa:73:81 (A54 von Emilek) f1:c3:10:70:43:b7 (Nigeria187) Sent Read By Type Request, Characteristic, Handles: 0x000c..0x000d
+
+Frame 548: 16 bytes on wire (128 bits), 16 bytes captured (128 bits)
+Bluetooth
+Bluetooth HCI H4
+Bluetooth HCI ACL Packet
+Bluetooth L2CAP Protocol
+Bluetooth Attribute Protocol
+
+0000  02 02 00 0b 00 07 00 04 00 08 0c 00 0d 00 03 28   ...............(
+
+No.     Time           Source                Destination           Info
+    550 48.667167      f1:c3:10:70:43:b7 (Nigeria187) SamsungElect_fa:73:81 (A54 von Emilek) Rcvd Error Response - Attribute Not Found, Handle: 0x000c (GATT: Service Changed)
+
+Frame 550: 14 bytes on wire (112 bits), 14 bytes captured (112 bits)
+Bluetooth
+Bluetooth HCI H4
+Bluetooth HCI ACL Packet
+Bluetooth L2CAP Protocol
+Bluetooth Attribute Protocol
+
+0000  02 02 20 09 00 05 00 04 00 01 08 0c 00 0a         .. ...........
+
+No.     Time           Source                Destination           Info
+    551 48.667647      SamsungElect_fa:73:81 (A54 von Emilek) f1:c3:10:70:43:b7 (Nigeria187) Sent Find Information Request, Handles: 0x000d..0x000d
+
+Frame 551: 14 bytes on wire (112 bits), 14 bytes captured (112 bits)
+Bluetooth
+Bluetooth HCI H4
+Bluetooth HCI ACL Packet
+Bluetooth L2CAP Protocol
+Bluetooth Attribute Protocol
+
+0000  02 02 00 09 00 05 00 04 00 04 0d 00 0d 00         ..............
+
+No.     Time           Source                Destination           Info
+    555 48.682242      f1:c3:10:70:43:b7 (Nigeria187) SamsungElect_fa:73:81 (A54 von Emilek) Rcvd Find Information Response, Handle: 0x000d (GATT: Service Changed: Client Characteristic Configuration)
+
+Frame 555: 15 bytes on wire (120 bits), 15 bytes captured (120 bits)
+Bluetooth
+Bluetooth HCI H4
+Bluetooth HCI ACL Packet
+Bluetooth L2CAP Protocol
+Bluetooth Attribute Protocol
+
+0000  02 02 20 0a 00 06 00 04 00 05 01 0d 00 02 29      .. ...........)
+
+No.     Time           Source                Destination           Info
+    556 48.682702      SamsungElect_fa:73:81 (A54 von Emilek) f1:c3:10:70:43:b7 (Nigeria187) Sent Read By Type Request, Include, Handles: 0x000e..0x0014
+
+Frame 556: 16 bytes on wire (128 bits), 16 bytes captured (128 bits)
+Bluetooth
+Bluetooth HCI H4
+Bluetooth HCI ACL Packet
+Bluetooth L2CAP Protocol
+Bluetooth Attribute Protocol
+
+0000  02 02 00 0b 00 07 00 04 00 08 0e 00 14 00 02 28   ...............(
+
+No.     Time           Source                Destination           Info
+    560 48.697740      f1:c3:10:70:43:b7 (Nigeria187) SamsungElect_fa:73:81 (A54 von Emilek) Rcvd Error Response - Attribute Not Found, Handle: 0x000e (GMAP Role)
+
+Frame 560: 14 bytes on wire (112 bits), 14 bytes captured (112 bits)
+Bluetooth
+Bluetooth HCI H4
+Bluetooth HCI ACL Packet
+Bluetooth L2CAP Protocol
+Bluetooth Attribute Protocol
+
+0000  02 02 20 09 00 05 00 04 00 01 08 0e 00 0a         .. ...........
+
+No.     Time           Source                Destination           Info
+    561 48.698261      SamsungElect_fa:73:81 (A54 von Emilek) f1:c3:10:70:43:b7 (Nigeria187) Sent Read By Type Request, Characteristic, Handles: 0x000e..0x0014
+
+Frame 561: 16 bytes on wire (128 bits), 16 bytes captured (128 bits)
+Bluetooth
+Bluetooth HCI H4
+Bluetooth HCI ACL Packet
+Bluetooth L2CAP Protocol
+Bluetooth Attribute Protocol
+
+0000  02 02 00 0b 00 07 00 04 00 08 0e 00 14 00 03 28   ...............(
+
+No.     Time           Source                Destination           Info
+    563 48.712341      f1:c3:10:70:43:b7 (Nigeria187) SamsungElect_fa:73:81 (A54 von Emilek) Rcvd Read By Type Response, Attribute List Length: 2, UGG Features, BGS Features
+
+Frame 563: 25 bytes on wire (200 bits), 25 bytes captured (200 bits)
+Bluetooth
+Bluetooth HCI H4
+Bluetooth HCI ACL Packet
+Bluetooth L2CAP Protocol
+Bluetooth Attribute Protocol
+
+0000  02 02 20 14 00 10 00 04 00 09 07 0f 00 18 10 00   .. .............
+0010  01 2c 12 00 10 13 00 03 2c                        .,......,
+
+No.     Time           Source                Destination           Info
+    564 48.712765      SamsungElect_fa:73:81 (A54 von Emilek) f1:c3:10:70:43:b7 (Nigeria187) Sent Read By Type Request, Characteristic, Handles: 0x0013..0x0014
+
+Frame 564: 16 bytes on wire (128 bits), 16 bytes captured (128 bits)
+Bluetooth
+Bluetooth HCI H4
+Bluetooth HCI ACL Packet
+Bluetooth L2CAP Protocol
+Bluetooth Attribute Protocol
+
+0000  02 02 00 0b 00 07 00 04 00 08 13 00 14 00 03 28   ...............(
+
+No.     Time           Source                Destination           Info
+    568 48.727587      f1:c3:10:70:43:b7 (Nigeria187) SamsungElect_fa:73:81 (A54 von Emilek) Rcvd Error Response - Attribute Not Found, Handle: 0x0013 (GMAP Role: BGS Features)
+
+Frame 568: 14 bytes on wire (112 bits), 14 bytes captured (112 bits)
+Bluetooth
+Bluetooth HCI H4
+Bluetooth HCI ACL Packet
+Bluetooth L2CAP Protocol
+Bluetooth Attribute Protocol
+
+0000  02 02 20 09 00 05 00 04 00 01 08 13 00 0a         .. ...........
+
+No.     Time           Source                Destination           Info
+    569 48.728283      SamsungElect_fa:73:81 (A54 von Emilek) f1:c3:10:70:43:b7 (Nigeria187) Sent Find Information Request, Handles: 0x0011..0x0011
+
+Frame 569: 14 bytes on wire (112 bits), 14 bytes captured (112 bits)
+Bluetooth
+Bluetooth HCI H4
+Bluetooth HCI ACL Packet
+Bluetooth L2CAP Protocol
+Bluetooth Attribute Protocol
+
+0000  02 02 00 09 00 05 00 04 00 04 11 00 11 00         ..............
+
+No.     Time           Source                Destination           Info
+    571 48.742300      f1:c3:10:70:43:b7 (Nigeria187) SamsungElect_fa:73:81 (A54 von Emilek) Rcvd Find Information Response, Handle: 0x0011 (GMAP Role: UGG Features: Client Characteristic Configuration)
+
+Frame 571: 15 bytes on wire (120 bits), 15 bytes captured (120 bits)
+Bluetooth
+Bluetooth HCI H4
+Bluetooth HCI ACL Packet
+Bluetooth L2CAP Protocol
+Bluetooth Attribute Protocol
+
+0000  02 02 20 0a 00 06 00 04 00 05 01 11 00 02 29      .. ...........)
+
+No.     Time           Source                Destination           Info
+    572 48.743049      SamsungElect_fa:73:81 (A54 von Emilek) f1:c3:10:70:43:b7 (Nigeria187) Sent Find Information Request, Handles: 0x0014..0x0014
+
+Frame 572: 14 bytes on wire (112 bits), 14 bytes captured (112 bits)
+Bluetooth
+Bluetooth HCI H4
+Bluetooth HCI ACL Packet
+Bluetooth L2CAP Protocol
+Bluetooth Attribute Protocol
+
+0000  02 02 00 09 00 05 00 04 00 04 14 00 14 00         ..............
+
+No.     Time           Source                Destination           Info
+    574 48.757202      f1:c3:10:70:43:b7 (Nigeria187) SamsungElect_fa:73:81 (A54 von Emilek) Rcvd Find Information Response, Handle: 0x0014 (GMAP Role: BGS Features: Client Characteristic Configuration)
+
+Frame 574: 15 bytes on wire (120 bits), 15 bytes captured (120 bits)
+Bluetooth
+Bluetooth HCI H4
+Bluetooth HCI ACL Packet
+Bluetooth L2CAP Protocol
+Bluetooth Attribute Protocol
+
+0000  02 02 20 0a 00 06 00 04 00 05 01 14 00 02 29      .. ...........)
+
+No.     Time           Source                Destination           Info
+    575 48.757694      SamsungElect_fa:73:81 (A54 von Emilek) f1:c3:10:70:43:b7 (Nigeria187) Sent Read By Type Request, Include, Handles: 0x0015..0xffff
+
+Frame 575: 16 bytes on wire (128 bits), 16 bytes captured (128 bits)
+Bluetooth
+Bluetooth HCI H4
+Bluetooth HCI ACL Packet
+Bluetooth L2CAP Protocol
+Bluetooth Attribute Protocol
+
+0000  02 02 00 0b 00 07 00 04 00 08 15 00 ff ff 02 28   ...............(
+
+No.     Time           Source                Destination           Info
+    577 48.772217      f1:c3:10:70:43:b7 (Nigeria187) SamsungElect_fa:73:81 (A54 von Emilek) Rcvd Error Response - Attribute Not Found, Handle: 0x0015 (Nordic Semiconductor ASA)
+
+Frame 577: 14 bytes on wire (112 bits), 14 bytes captured (112 bits)
+Bluetooth
+Bluetooth HCI H4
+Bluetooth HCI ACL Packet
+Bluetooth L2CAP Protocol
+Bluetooth Attribute Protocol
+
+0000  02 02 20 09 00 05 00 04 00 01 08 15 00 0a         .. ...........
+
+No.     Time           Source                Destination           Info
+    578 48.772675      SamsungElect_fa:73:81 (A54 von Emilek) f1:c3:10:70:43:b7 (Nigeria187) Sent Read By Type Request, Characteristic, Handles: 0x0015..0xffff
+
+Frame 578: 16 bytes on wire (128 bits), 16 bytes captured (128 bits)
+Bluetooth
+Bluetooth HCI H4
+Bluetooth HCI ACL Packet
+Bluetooth L2CAP Protocol
+Bluetooth Attribute Protocol
+
+0000  02 02 00 0b 00 07 00 04 00 08 15 00 ff ff 03 28   ...............(
+
+No.     Time           Source                Destination           Info
+    580 48.787613      f1:c3:10:70:43:b7 (Nigeria187) SamsungElect_fa:73:81 (A54 von Emilek) Rcvd Read By Type Response, Attribute List Length: 1, Unknown
+
+Frame 580: 32 bytes on wire (256 bits), 32 bytes captured (256 bits)
+Bluetooth
+Bluetooth HCI H4
+Bluetooth HCI ACL Packet
+Bluetooth L2CAP Protocol
+Bluetooth Attribute Protocol
+
+0000  02 02 20 1b 00 17 00 04 00 09 15 16 00 28 17 00   .. ..........(..
+0010  50 ea da 30 88 83 b8 9f 60 4f 15 f3 03 00 c9 8e   P..0....`O......
+
+No.     Time           Source                Destination           Info
+    581 48.788181      SamsungElect_fa:73:81 (A54 von Emilek) f1:c3:10:70:43:b7 (Nigeria187) Sent Read By Type Request, Characteristic, Handles: 0x0017..0xffff
+
+Frame 581: 16 bytes on wire (128 bits), 16 bytes captured (128 bits)
+Bluetooth
+Bluetooth HCI H4
+Bluetooth HCI ACL Packet
+Bluetooth L2CAP Protocol
+Bluetooth Attribute Protocol
+
+0000  02 02 00 0b 00 07 00 04 00 08 17 00 ff ff 03 28   ...............(
+
+No.     Time           Source                Destination           Info
+    584 48.802368      f1:c3:10:70:43:b7 (Nigeria187) SamsungElect_fa:73:81 (A54 von Emilek) Rcvd Error Response - Attribute Not Found, Handle: 0x0017 (Nordic Semiconductor ASA: Unknown)
+
+Frame 584: 14 bytes on wire (112 bits), 14 bytes captured (112 bits)
+Bluetooth
+Bluetooth HCI H4
+Bluetooth HCI ACL Packet
+Bluetooth L2CAP Protocol
+Bluetooth Attribute Protocol
+
+0000  02 02 20 09 00 05 00 04 00 01 08 17 00 0a         .. ...........
+
+No.     Time           Source                Destination           Info
+    585 48.803181      SamsungElect_fa:73:81 (A54 von Emilek) f1:c3:10:70:43:b7 (Nigeria187) Sent Find Information Request, Handles: 0x0018..0xffff
+
+Frame 585: 14 bytes on wire (112 bits), 14 bytes captured (112 bits)
+Bluetooth
+Bluetooth HCI H4
+Bluetooth HCI ACL Packet
+Bluetooth L2CAP Protocol
+Bluetooth Attribute Protocol
+
+0000  02 02 00 09 00 05 00 04 00 04 18 00 ff ff         ..............
+
+No.     Time           Source                Destination           Info
+    588 48.817426      f1:c3:10:70:43:b7 (Nigeria187) SamsungElect_fa:73:81 (A54 von Emilek) Rcvd Find Information Response, Handle: 0x0018 (Nordic Semiconductor ASA: Unknown: Client Characteristic Configuration)
+
+Frame 588: 15 bytes on wire (120 bits), 15 bytes captured (120 bits)
+Bluetooth
+Bluetooth HCI H4
+Bluetooth HCI ACL Packet
+Bluetooth L2CAP Protocol
+Bluetooth Attribute Protocol
+
+0000  02 02 20 0a 00 06 00 04 00 05 01 18 00 02 29      .. ...........)
+
+No.     Time           Source                Destination           Info
+    589 48.817999      SamsungElect_fa:73:81 (A54 von Emilek) f1:c3:10:70:43:b7 (Nigeria187) Sent Find Information Request, Handles: 0x0019..0xffff
+
+Frame 589: 14 bytes on wire (112 bits), 14 bytes captured (112 bits)
+Bluetooth
+Bluetooth HCI H4
+Bluetooth HCI ACL Packet
+Bluetooth L2CAP Protocol
+Bluetooth Attribute Protocol
+
+0000  02 02 00 09 00 05 00 04 00 04 19 00 ff ff         ..............
+
+No.     Time           Source                Destination           Info
+    591 48.832347      f1:c3:10:70:43:b7 (Nigeria187) SamsungElect_fa:73:81 (A54 von Emilek) Rcvd Error Response - Attribute Not Found, Handle: 0x0019 (Nordic Semiconductor ASA: Unknown: Unknown)
+
+Frame 591: 14 bytes on wire (112 bits), 14 bytes captured (112 bits)
+Bluetooth
+Bluetooth HCI H4
+Bluetooth HCI ACL Packet
+Bluetooth L2CAP Protocol
+Bluetooth Attribute Protocol
+
+0000  02 02 20 09 00 05 00 04 00 01 04 19 00 0a         .. ...........
+
+No.     Time           Source                Destination           Info
+    597 48.871781      SamsungElect_fa:73:81 (A54 von Emilek) f1:c3:10:70:43:b7 (Nigeria187) Sent Write Request, Handle: 0x0011 (GMAP Role: UGG Features: Client Characteristic Configuration)
+
+Frame 597: 14 bytes on wire (112 bits), 14 bytes captured (112 bits)
+Bluetooth
+Bluetooth HCI H4
+Bluetooth HCI ACL Packet
+Bluetooth L2CAP Protocol
+Bluetooth Attribute Protocol
+
+0000  02 02 00 09 00 05 00 04 00 12 11 00 01 00         ..............
+
+No.     Time           Source                Destination           Info
+    601 48.884876      f1:c3:10:70:43:b7 (Nigeria187) SamsungElect_fa:73:81 (A54 von Emilek) Rcvd Write Response, Handle: 0x0011 (GMAP Role: UGG Features: Client Characteristic Configuration)
+
+Frame 601: 10 bytes on wire (80 bits), 10 bytes captured (80 bits)
+Bluetooth
+Bluetooth HCI H4
+Bluetooth HCI ACL Packet
+Bluetooth L2CAP Protocol
+Bluetooth Attribute Protocol
+
+0000  02 02 20 05 00 01 00 04 00 13                     .. .......
+
+No.     Time           Source                Destination           Info
+    795 52.445557      SamsungElect_fa:73:81 (A54 von Emilek) f1:c3:10:70:43:b7 (Nigeria187) Sent Write Request, Handle: 0x0010 (GMAP Role: UGG Features)
+
+Frame 795: 43 bytes on wire (344 bits), 43 bytes captured (344 bits)
+Bluetooth
+Bluetooth HCI H4
+Bluetooth HCI ACL Packet
+Bluetooth L2CAP Protocol
+Bluetooth Attribute Protocol
+
+0000  02 02 00 26 00 22 00 04 00 12 10 00 41 54 2b 4f   ...&."......AT+O
+0010  4b 46 43 47 3d 4f 4b 41 49 5f 43 41 52 2c 30 2c   KFCG=OKAI_CAR,0,
+0020  30 2c 31 2c 30 30 32 34 24 0d 0a                  0,1,0024$..
+
+No.     Time           Source                Destination           Info
+    797 52.500010      f1:c3:10:70:43:b7 (Nigeria187) SamsungElect_fa:73:81 (A54 von Emilek) Rcvd Write Response, Handle: 0x0010 (GMAP Role: UGG Features)
+
+Frame 797: 10 bytes on wire (80 bits), 10 bytes captured (80 bits)
+Bluetooth
+Bluetooth HCI H4
+Bluetooth HCI ACL Packet
+Bluetooth L2CAP Protocol
+Bluetooth Attribute Protocol
+
+0000  02 02 20 05 00 01 00 04 00 13                     .. .......
+
+No.     Time           Source                Destination           Info
+    798 52.502240      f1:c3:10:70:43:b7 (Nigeria187) SamsungElect_fa:73:81 (A54 von Emilek) Rcvd  [Reassembled in #801]
+
+Frame 798: 32 bytes on wire (256 bits), 32 bytes captured (256 bits)
+Bluetooth
+Bluetooth HCI H4
+Bluetooth HCI ACL Packet
+
+0000  02 02 20 1b 00 39 00 04 00 1b 10 00 2b 41 43 4b   .. ..9......+ACK
+0010  3a 4f 4b 46 43 47 3d 30 2c 31 2c 31 2c 31 2c 33   :OKFCG=0,1,1,1,3
+
+No.     Time           Source                Destination           Info
+    799 52.503214      f1:c3:10:70:43:b7 (Nigeria187) SamsungElect_fa:73:81 (A54 von Emilek) Rcvd  [Continuation to #798] [Reassembled in #801]
+
+Frame 799: 32 bytes on wire (256 bits), 32 bytes captured (256 bits)
+Bluetooth
+Bluetooth HCI H4
+Bluetooth HCI ACL Packet
+
+0000  02 02 10 1b 00 2c 30 2c 31 2c 31 2c 30 2c 30 2c   .....,0,1,1,0,0,
+0010  32 2c 30 2c 45 53 35 32 30 41 2d 42 54 2c 31 2c   2,0,ES520A-BT,1,
+
+No.     Time           Source                Destination           Info
+    800 52.503871      f1:c3:10:70:43:b7 (Nigeria187) SamsungElect_fa:73:81 (A54 von Emilek) Rcvd  [Continuation to #798] [Reassembled in #801]
+
+Frame 800: 9 bytes on wire (72 bits), 9 bytes captured (72 bits)
+Bluetooth
+Bluetooth HCI H4
+Bluetooth HCI ACL Packet
+
+0000  02 02 10 04 00 30 30 32 34                        .....0024
+
+No.     Time           Source                Destination           Info
+    801 52.504441      f1:c3:10:70:43:b7 (Nigeria187) SamsungElect_fa:73:81 (A54 von Emilek) Rcvd Handle Value Notification, Handle: 0x0010 (GMAP Role: UGG Features)
+
+Frame 801: 8 bytes on wire (64 bits), 8 bytes captured (64 bits)
+Bluetooth
+Bluetooth HCI H4
+Bluetooth HCI ACL Packet
+Bluetooth L2CAP Protocol
+Bluetooth Attribute Protocol
+
+Frame (8 bytes):
+0000  02 02 10 03 00 24 0d 0a                           .....$..
+Reassembled BTHCI ACL (61 bytes):
+0000  39 00 04 00 1b 10 00 2b 41 43 4b 3a 4f 4b 46 43   9......+ACK:OKFC
+0010  47 3d 30 2c 31 2c 31 2c 31 2c 33 2c 30 2c 31 2c   G=0,1,1,1,3,0,1,
+0020  31 2c 30 2c 30 2c 32 2c 30 2c 45 53 35 32 30 41   1,0,0,2,0,ES520A
+0030  2d 42 54 2c 31 2c 30 30 32 34 24 0d 0a            -BT,1,0024$..
+
+No.     Time           Source                Destination           Info
+    802 52.507988      SamsungElect_fa:73:81 (A54 von Emilek) f1:c3:10:70:43:b7 (Nigeria187) Sent Write Request, Handle: 0x0010 (GMAP Role: UGG Features)
+
+Frame 802: 39 bytes on wire (312 bits), 39 bytes captured (312 bits)
+Bluetooth
+Bluetooth HCI H4
+Bluetooth HCI ACL Packet
+Bluetooth L2CAP Protocol
+Bluetooth Attribute Protocol
+
+0000  02 02 00 22 00 1e 00 04 00 12 10 00 41 54 2b 4f   ..."........AT+O
+0010  4b 58 57 4d 3d 4f 4b 41 49 5f 43 41 52 2c 31 2c   KXWM=OKAI_CAR,1,
+0020  30 30 30 34 24 0d 0a                              0004$..
+
+No.     Time           Source                Destination           Info
+    808 52.559811      f1:c3:10:70:43:b7 (Nigeria187) SamsungElect_fa:73:81 (A54 von Emilek) Rcvd Write Response, Handle: 0x0010 (GMAP Role: UGG Features)
+
+Frame 808: 10 bytes on wire (80 bits), 10 bytes captured (80 bits)
+Bluetooth
+Bluetooth HCI H4
+Bluetooth HCI ACL Packet
+Bluetooth L2CAP Protocol
+Bluetooth Attribute Protocol
+
+0000  02 02 20 05 00 01 00 04 00 13                     .. .......
+
+No.     Time           Source                Destination           Info
+    809 52.561652      f1:c3:10:70:43:b7 (Nigeria187) SamsungElect_fa:73:81 (A54 von Emilek) Rcvd  [Reassembled in #810]
+
+Frame 809: 32 bytes on wire (256 bits), 32 bytes captured (256 bits)
+Bluetooth
+Bluetooth HCI H4
+Bluetooth HCI ACL Packet
+
+0000  02 02 20 1b 00 19 00 04 00 1b 10 00 2b 41 43 4b   .. .........+ACK
+0010  3a 4f 4b 58 57 4d 3d 31 2c 31 2c 30 30 30 34 24   :OKXWM=1,1,0004$
+
+No.     Time           Source                Destination           Info
+    810 52.563269      f1:c3:10:70:43:b7 (Nigeria187) SamsungElect_fa:73:81 (A54 von Emilek) Rcvd Handle Value Notification, Handle: 0x0010 (GMAP Role: UGG Features)
+
+Frame 810: 7 bytes on wire (56 bits), 7 bytes captured (56 bits)
+Bluetooth
+Bluetooth HCI H4
+Bluetooth HCI ACL Packet
+Bluetooth L2CAP Protocol
+Bluetooth Attribute Protocol
+
+Frame (7 bytes):
+0000  02 02 10 02 00 0d 0a                              .......
+Reassembled BTHCI ACL (29 bytes):
+0000  19 00 04 00 1b 10 00 2b 41 43 4b 3a 4f 4b 58 57   .......+ACK:OKXW
+0010  4d 3d 31 2c 31 2c 30 30 30 34 24 0d 0a            M=1,1,0004$..
+
+No.     Time           Source                Destination           Info
+    811 52.569871      SamsungElect_fa:73:81 (A54 von Emilek) f1:c3:10:70:43:b7 (Nigeria187) Sent Write Request, Handle: 0x0010 (GMAP Role: UGG Features)
+
+Frame 811: 77 bytes on wire (616 bits), 77 bytes captured (616 bits)
+Bluetooth
+Bluetooth HCI H4
+Bluetooth HCI ACL Packet
+Bluetooth L2CAP Protocol
+Bluetooth Attribute Protocol
+
+0000  02 02 00 48 00 44 00 04 00 12 10 00 41 54 2b 4f   ...H.D......AT+O
+0010  4b 4c 46 43 3d 4f 4b 41 49 5f 43 41 52 2c 30 2c   KLFC=OKAI_CAR,0,
+0020  31 2c 31 2c 31 2c 31 2c 30 2c 31 2c 31 2c 30 2c   1,1,1,1,0,1,1,0,
+0030  30 2c 32 2c 30 2c 45 53 35 32 30 41 2d 42 54 2c   0,2,0,ES520A-BT,
+0040  31 2c 30 2c 30 2c 30 30 32 34 24 0d 0a            1,0,0,0024$..
+
+No.     Time           Source                Destination           Info
+    819 52.649794      f1:c3:10:70:43:b7 (Nigeria187) SamsungElect_fa:73:81 (A54 von Emilek) Rcvd Write Response, Handle: 0x0010 (GMAP Role: UGG Features)
+
+Frame 819: 10 bytes on wire (80 bits), 10 bytes captured (80 bits)
+Bluetooth
+Bluetooth HCI H4
+Bluetooth HCI ACL Packet
+Bluetooth L2CAP Protocol
+Bluetooth Attribute Protocol
+
+0000  02 02 20 05 00 01 00 04 00 13                     .. .......
+
+No.     Time           Source                Destination           Info
+    820 52.650427      f1:c3:10:70:43:b7 (Nigeria187) SamsungElect_fa:73:81 (A54 von Emilek) Rcvd  [Reassembled in #822]
+
+Frame 820: 32 bytes on wire (256 bits), 32 bytes captured (256 bits)
+Bluetooth
+Bluetooth HCI H4
+Bluetooth HCI ACL Packet
+
+0000  02 02 20 1b 00 39 00 04 00 1b 10 00 2b 41 43 4b   .. ..9......+ACK
+0010  3a 4f 4b 4c 46 43 3d 30 2c 31 2c 31 2c 31 2c 31   :OKLFC=0,1,1,1,1
+
+No.     Time           Source                Destination           Info
+    821 52.651083      f1:c3:10:70:43:b7 (Nigeria187) SamsungElect_fa:73:81 (A54 von Emilek) Rcvd  [Continuation to #820] [Reassembled in #822]
+
+Frame 821: 32 bytes on wire (256 bits), 32 bytes captured (256 bits)
+Bluetooth
+Bluetooth HCI H4
+Bluetooth HCI ACL Packet
+
+0000  02 02 10 1b 00 2c 30 2c 31 2c 31 2c 30 2c 30 2c   .....,0,1,1,0,0,
+0010  32 2c 30 2c 45 53 35 32 30 41 2d 42 54 2c 31 2c   2,0,ES520A-BT,1,
+
+No.     Time           Source                Destination           Info
+    822 52.651712      f1:c3:10:70:43:b7 (Nigeria187) SamsungElect_fa:73:81 (A54 von Emilek) Rcvd Handle Value Notification, Handle: 0x0010 (GMAP Role: UGG Features)
+
+Frame 822: 12 bytes on wire (96 bits), 12 bytes captured (96 bits)
+Bluetooth
+Bluetooth HCI H4
+Bluetooth HCI ACL Packet
+Bluetooth L2CAP Protocol
+Bluetooth Attribute Protocol
+
+Frame (12 bytes):
+0000  02 02 10 07 00 30 30 32 34 24 0d 0a               .....0024$..
+Reassembled BTHCI ACL (61 bytes):
+0000  39 00 04 00 1b 10 00 2b 41 43 4b 3a 4f 4b 4c 46   9......+ACK:OKLF
+0010  43 3d 30 2c 31 2c 31 2c 31 2c 31 2c 30 2c 31 2c   C=0,1,1,1,1,0,1,
+0020  31 2c 30 2c 30 2c 32 2c 30 2c 45 53 35 32 30 41   1,0,0,2,0,ES520A
+0030  2d 42 54 2c 31 2c 30 30 32 34 24 0d 0a            -BT,1,0024$..
+
+No.     Time           Source                Destination           Info
+    825 52.666581      SamsungElect_fa:73:81 (A54 von Emilek) f1:c3:10:70:43:b7 (Nigeria187) Sent Write Request, Handle: 0x0010 (GMAP Role: UGG Features)
+
+Frame 825: 39 bytes on wire (312 bits), 39 bytes captured (312 bits)
+Bluetooth
+Bluetooth HCI H4
+Bluetooth HCI ACL Packet
+Bluetooth L2CAP Protocol
+Bluetooth Attribute Protocol
+
+0000  02 02 00 22 00 1e 00 04 00 12 10 00 41 54 2b 4f   ..."........AT+O
+0010  4b 58 57 4d 3d 4f 4b 41 49 5f 43 41 52 2c 30 2c   KXWM=OKAI_CAR,0,
+0020  30 30 30 33 24 0d 0a                              0003$..
+
+No.     Time           Source                Destination           Info
+    827 52.709907      f1:c3:10:70:43:b7 (Nigeria187) SamsungElect_fa:73:81 (A54 von Emilek) Rcvd Write Response, Handle: 0x0010 (GMAP Role: UGG Features)
+
+Frame 827: 10 bytes on wire (80 bits), 10 bytes captured (80 bits)
+Bluetooth
+Bluetooth HCI H4
+Bluetooth HCI ACL Packet
+Bluetooth L2CAP Protocol
+Bluetooth Attribute Protocol
+
+0000  02 02 20 05 00 01 00 04 00 13                     .. .......
+
+No.     Time           Source                Destination           Info
+    828 52.710631      f1:c3:10:70:43:b7 (Nigeria187) SamsungElect_fa:73:81 (A54 von Emilek) Rcvd  [Reassembled in #830]
+
+Frame 828: 32 bytes on wire (256 bits), 32 bytes captured (256 bits)
+Bluetooth
+Bluetooth HCI H4
+Bluetooth HCI ACL Packet
+
+0000  02 02 20 1b 00 19 00 04 00 1b 10 00 2b 41 43 4b   .. .........+ACK
+0010  3a 4f 4b 58 57 4d 3d 31 2c 30 2c 30 30 30 33 24   :OKXWM=1,0,0003$
+
+No.     Time           Source                Destination           Info
+    830 52.711781      f1:c3:10:70:43:b7 (Nigeria187) SamsungElect_fa:73:81 (A54 von Emilek) Rcvd Handle Value Notification, Handle: 0x0010 (GMAP Role: UGG Features)
+
+Frame 830: 7 bytes on wire (56 bits), 7 bytes captured (56 bits)
+Bluetooth
+Bluetooth HCI H4
+Bluetooth HCI ACL Packet
+Bluetooth L2CAP Protocol
+Bluetooth Attribute Protocol
+
+Frame (7 bytes):
+0000  02 02 10 02 00 0d 0a                              .......
+Reassembled BTHCI ACL (29 bytes):
+0000  19 00 04 00 1b 10 00 2b 41 43 4b 3a 4f 4b 58 57   .......+ACK:OKXW
+0010  4d 3d 31 2c 30 2c 30 30 30 33 24 0d 0a            M=1,0,0003$..
+
+No.     Time           Source                Destination           Info
+    862 53.219936      f1:c3:10:70:43:b7 (Nigeria187) SamsungElect_fa:73:81 (A54 von Emilek) Rcvd Connection Parameter Update Request
+
+Frame 862: 21 bytes on wire (168 bits), 21 bytes captured (168 bits)
+Bluetooth
+Bluetooth HCI H4
+Bluetooth HCI ACL Packet
+Bluetooth L2CAP Protocol
+
+0000  02 02 20 10 00 0c 00 05 00 12 03 08 00 50 00 a0   .. ..........P..
+0010  00 00 00 90 01                                    .....
+
+No.     Time           Source                Destination           Info
+    864 53.220587      SamsungElect_fa:73:81 (A54 von Emilek) f1:c3:10:70:43:b7 (Nigeria187) Sent Connection Parameter Update Response (Accepted)
+
+Frame 864: 15 bytes on wire (120 bits), 15 bytes captured (120 bits)
+Bluetooth
+Bluetooth HCI H4
+Bluetooth HCI ACL Packet
+Bluetooth L2CAP Protocol
+
+0000  02 02 00 0a 00 06 00 05 00 13 03 02 00 00 00      ...............

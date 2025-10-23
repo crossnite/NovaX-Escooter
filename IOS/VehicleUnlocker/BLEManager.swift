@@ -7,9 +7,9 @@ class BLEManager: NSObject, ObservableObject {
     @Published var devices: [CBPeripheral] = []
     @Published var connected: CBPeripheral?
     @Published var logs: [String] = []
-    @Published var serviceUUIDString: String = ""
-    @Published var txUUIDString: String = ""
-    @Published var rxUUIDString: String = ""
+    @Published var serviceUUIDString: String = "2c00"
+    @Published var txUUIDString: String = "2c01"
+    @Published var rxUUIDString: String = "2c01"
     @Published var rssiMap: [UUID: Int] = [:]
     @Published var targetNameContains: String = "Nigeria187"
     @Published var discoveredCharacteristics: [CBCharacteristic] = []
