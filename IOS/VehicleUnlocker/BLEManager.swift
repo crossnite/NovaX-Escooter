@@ -15,6 +15,7 @@ class BLEManager: NSObject, ObservableObject {
     @Published var discoveredCharacteristics: [CBCharacteristic] = []
     @Published var selectedTXUUID: String = ""
     @Published var selectedRXUUID: String = ""
+    @Published var autoUnlockOnConnect: Bool = false
 
     private var central: CBCentralManager!
     private var txChar: CBCharacteristic?
@@ -229,6 +230,8 @@ extension BLEManager: CBCentralManagerDelegate, CBPeripheralDelegate {
         connected = peripheral
         peripheral.delegate = self
         append("connected")
+        // Auto discover services upon connect
+        peripheral.discoverServices(nil)
     }
 
     func centralManager(_ central: CBCentralManager, didDisconnectPeripheral peripheral: CBPeripheral, error: Error?) {
@@ -256,6 +259,15 @@ extension BLEManager: CBCentralManagerDelegate, CBPeripheralDelegate {
             }
         }
         append("chars ready")
+        // After first batch of characteristics, auto-pick TX/RX and enable notifications
+        ensureTXRXSelectedIfPossible()
+        enableAllNotifications()
+        if autoUnlockOnConnect {
+            // Trigger unlock shortly after discovery to give notifications time to arm
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.15) {
+                self.send(action: "Unlock")
+            }
+        }
     }
 
     func peripheral(_ peripheral: CBPeripheral, didUpdateValueFor characteristic: CBCharacteristic, error: Error?) {

@@ -13,6 +13,7 @@ struct ContentView: View {
                         .textFieldStyle(.roundedBorder)
                         .autocorrectionDisabled(true)
                         .textInputAutocapitalization(.never)
+                    Toggle("Auto Unlock on Connect", isOn: $ble.autoUnlockOnConnect)
                 }
                 Section("Devices") {
                     HStack {
