@@ -14,6 +14,7 @@ struct ContentView: View {
                         .autocorrectionDisabled(true)
                         .textInputAutocapitalization(.never)
                     Toggle("Auto Unlock on Connect", isOn: $ble.autoUnlockOnConnect)
+                    Toggle("Auto Connect on Scan", isOn: $ble.autoConnectEnabled)
                 }
                 Section("Devices") {
                     HStack {

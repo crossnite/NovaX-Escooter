@@ -16,10 +16,12 @@ class BLEManager: NSObject, ObservableObject {
     @Published var selectedTXUUID: String = ""
     @Published var selectedRXUUID: String = ""
     @Published var autoUnlockOnConnect: Bool = false
+    @Published var autoConnectEnabled: Bool = false
 
     private var central: CBCentralManager!
     private var txChar: CBCharacteristic?
     private var rxChar: CBCharacteristic?
+    private var connectingIds: Set<UUID> = []
 
     override init() {
         super.init()
@@ -230,7 +232,10 @@ extension BLEManager: CBCentralManagerDelegate, CBPeripheralDelegate {
         if !devices.contains(where: { $0.identifier == peripheral.identifier }) { devices.append(peripheral) }
         rssiMap[peripheral.identifier] = RSSI.intValue
         let advName = (advertisementData[CBAdvertisementDataLocalNameKey] as? String) ?? peripheral.name ?? ""
-        if !advName.isEmpty, advName.localizedCaseInsensitiveContains(targetNameContains), connected == nil {
+        if autoConnectEnabled, !advName.isEmpty, advName.localizedCaseInsensitiveContains(targetNameContains), connected == nil, !connectingIds.contains(peripheral.identifier) {
+            // Stop scanning before initiating connect to reduce race conditions
+            stopScan()
+            connectingIds.insert(peripheral.identifier)
             connect(peripheral)
         }
     }
@@ -246,10 +251,12 @@ extension BLEManager: CBCentralManagerDelegate, CBPeripheralDelegate {
     func centralManager(_ central: CBCentralManager, didDisconnectPeripheral peripheral: CBPeripheral, error: Error?) {
         if let e = error { append("disconnected error: \(e.localizedDescription)") } else { append("disconnected") }
         if connected?.identifier == peripheral.identifier { connected = nil }
+        connectingIds.remove(peripheral.identifier)
     }
 
     func centralManager(_ central: CBCentralManager, didFailToConnect peripheral: CBPeripheral, error: Error?) {
         if let e = error { append("failToConnect: \(e.localizedDescription)") } else { append("failToConnect (no error)") }
+        connectingIds.remove(peripheral.identifier)
     }
 
     func peripheral(_ peripheral: CBPeripheral, didDiscoverServices error: Error?) {
@@ -261,12 +268,14 @@ extension BLEManager: CBCentralManagerDelegate, CBPeripheralDelegate {
     }
 
     func peripheral(_ peripheral: CBPeripheral, didDiscoverCharacteristicsFor service: CBService, error: Error?) {
-        let tx = CBUUID(string: txUUIDString)
-        let rx = CBUUID(string: rxUUIDString)
+        let txStr = txUUIDString.trimmingCharacters(in: .whitespacesAndNewlines)
+        let rxStr = rxUUIDString.trimmingCharacters(in: .whitespacesAndNewlines)
+        let txUUID: CBUUID? = txStr.isEmpty ? nil : CBUUID(string: txStr)
+        let rxUUID: CBUUID? = rxStr.isEmpty ? nil : CBUUID(string: rxStr)
         service.characteristics?.forEach { ch in
             append("char \(service.uuid.uuidString) -> \(ch.uuid.uuidString)")
-            if ch.uuid == tx { txChar = ch }
-            if ch.uuid == rx { rxChar = ch; peripheral.setNotifyValue(true, for: ch) }
+            if let u = txUUID, ch.uuid == u { txChar = ch }
+            if let u = rxUUID, ch.uuid == u { rxChar = ch; peripheral.setNotifyValue(true, for: ch) }
             if !discoveredCharacteristics.contains(where: { $0.uuid == ch.uuid }) {
                 discoveredCharacteristics.append(ch)
             }
