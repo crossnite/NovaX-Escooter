@@ -40,7 +40,11 @@ class BLEManager: NSObject, ObservableObject {
     }
 
     func connect(_ p: CBPeripheral) {
-        central.connect(p)
+        guard central != nil else { append("central not ready"); return }
+        guard central.state == .poweredOn else { append("cannot connect: bt state=\(central.state.rawValue)"); return }
+        DispatchQueue.main.async {
+            self.central.connect(p, options: nil)
+        }
         append("connect \(p.identifier.uuidString)")
     }
 
@@ -240,8 +244,12 @@ extension BLEManager: CBCentralManagerDelegate, CBPeripheralDelegate {
     }
 
     func centralManager(_ central: CBCentralManager, didDisconnectPeripheral peripheral: CBPeripheral, error: Error?) {
-        append("disconnected")
+        if let e = error { append("disconnected error: \(e.localizedDescription)") } else { append("disconnected") }
         if connected?.identifier == peripheral.identifier { connected = nil }
+    }
+
+    func centralManager(_ central: CBCentralManager, didFailToConnect peripheral: CBPeripheral, error: Error?) {
+        if let e = error { append("failToConnect: \(e.localizedDescription)") } else { append("failToConnect (no error)") }
     }
 
     func peripheral(_ peripheral: CBPeripheral, didDiscoverServices error: Error?) {
