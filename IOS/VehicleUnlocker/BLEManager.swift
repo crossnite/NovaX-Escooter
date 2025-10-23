@@ -98,11 +98,14 @@ class BLEManager: NSObject, ObservableObject {
                 self.append("action: Unlock sequence sent")
             }
         case "Lock":
-            // Safer lock sequence: bump XWM to 1 briefly, then 0 (mirrors observed patterns)
-            writeAscii("AT+OKXWM=OKAI_CAR,1,0004$\r\n", withResponse: true)
-            DispatchQueue.main.asyncAfter(deadline: .now() + 0.15) {
+            // Enhanced lock sequence: include OKLFC if lights are involved, then XWM steps
+            writeAscii("AT+OKLFC=OKAI_CAR,0,1,1,1,3,0,1,1,0,0,2,0,ES520A-BT,1,0,0,0026$\r\n", withResponse: true)
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
+                self.writeAscii("AT+OKXWM=OKAI_CAR,1,0004$\r\n", withResponse: true)
+            }
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
                 self.writeAscii("AT+OKXWM=OKAI_CAR,0,0003$\r\n", withResponse: true)
-                self.append("action: Lock sequence sent (XWM=1->0)")
+                self.append("action: Lock sequence sent (LFC + XWM=1->0)")
             }
         case "SendOKFCG":
             writeAscii("AT+OKFCG=OKAI_CAR,0,0,1,0024$\r\n", withResponse: true)
