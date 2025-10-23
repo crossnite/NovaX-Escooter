@@ -98,9 +98,12 @@ class BLEManager: NSObject, ObservableObject {
                 self.append("action: Unlock sequence sent")
             }
         case "Lock":
-            // Minimal observed command turning XWM=0 with code 0003
-            writeAscii("AT+OKXWM=OKAI_CAR,0,0003$\r\n", withResponse: true)
-            append("action: Lock sent (XWM=0,0003)")
+            // Safer lock sequence: bump XWM to 1 briefly, then 0 (mirrors observed patterns)
+            writeAscii("AT+OKXWM=OKAI_CAR,1,0004$\r\n", withResponse: true)
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.15) {
+                self.writeAscii("AT+OKXWM=OKAI_CAR,0,0003$\r\n", withResponse: true)
+                self.append("action: Lock sequence sent (XWM=1->0)")
+            }
         case "SendOKFCG":
             writeAscii("AT+OKFCG=OKAI_CAR,0,0,1,0024$\r\n", withResponse: true)
         case "SendXWM1":
