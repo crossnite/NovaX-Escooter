@@ -186,6 +186,11 @@ class BLEManager: NSObject, ObservableObject {
     }
 
     func startScan(serviceFilter: String?) {
+        guard central != nil else { append("central not ready"); return }
+        guard central.state == .poweredOn else {
+            append("bluetooth not poweredOn (state=\(central.state.rawValue))")
+            return
+        }
         isScanning = true
         devices.removeAll()
         if let f = serviceFilter, !f.isEmpty {
