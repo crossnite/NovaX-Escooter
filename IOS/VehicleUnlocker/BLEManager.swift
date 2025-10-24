@@ -11,17 +11,13 @@ class BLEManager: NSObject, ObservableObject {
     @Published var txUUIDString: String = "2c01"
     @Published var rxUUIDString: String = "2c01"
     @Published var rssiMap: [UUID: Int] = [:]
-    @Published var targetNameContains: String = "Nigeria187"
     @Published var discoveredCharacteristics: [CBCharacteristic] = []
     @Published var selectedTXUUID: String = ""
     @Published var selectedRXUUID: String = ""
-    @Published var autoUnlockOnConnect: Bool = false
-    @Published var autoConnectEnabled: Bool = false
 
     private var central: CBCentralManager!
     private var txChar: CBCharacteristic?
     private var rxChar: CBCharacteristic?
-    private var connectingIds: Set<UUID> = []
 
     override init() {
         super.init()
@@ -112,14 +108,6 @@ class BLEManager: NSObject, ObservableObject {
             writeAscii("AT+OKLFC=OKAI_CAR,0,1,1,1,3,0,1,1,0,0,2,0,ES520A-BT,1,0,0,0026$\r\n", withResponse: true)
         case "SendXWM0":
             writeAscii("AT+OKXWM=OKAI_CAR,0,0003$\r\n", withResponse: true)
-        case "LightsOn":
-            append("action: LightsOn (payload needed)")
-        case "LightsOff":
-            append("action: LightsOff (payload needed)")
-        case "Horn":
-            append("action: Horn (payload needed)")
-        case "Ping":
-            append("action: Ping (payload needed)")
         default:
             append("action: \(name) (unknown)")
         }
@@ -212,109 +200,3 @@ class BLEManager: NSObject, ObservableObject {
     }
 
     func enableAllNotifications() {
-        guard let p = connected else { return }
-        p.services?.forEach { s in
-            s.characteristics?.forEach { ch in
-                if ch.properties.contains(.notify) || ch.properties.contains(.indicate) {
-                    p.setNotifyValue(true, for: ch)
-                }
-            }
-        }
-        append("notifications enabled where available")
-    }
-
-    private func append(_ s: String) { logs.append(s) }
-}
-
-extension BLEManager: CBCentralManagerDelegate, CBPeripheralDelegate {
-    func centralManagerDidUpdateState(_ central: CBCentralManager) {
-        if central.state == .poweredOn { append("poweredOn") } else { append("state \(central.state.rawValue)") }
-    }
-
-    func centralManager(_ central: CBCentralManager, didDiscover peripheral: CBPeripheral, advertisementData: [String : Any], rssi RSSI: NSNumber) {
-        if !devices.contains(where: { $0.identifier == peripheral.identifier }) { devices.append(peripheral) }
-        rssiMap[peripheral.identifier] = RSSI.intValue
-        let advName = (advertisementData[CBAdvertisementDataLocalNameKey] as? String) ?? peripheral.name ?? ""
-        if autoConnectEnabled, !advName.isEmpty, advName.localizedCaseInsensitiveContains(targetNameContains), connected == nil, !connectingIds.contains(peripheral.identifier) {
-            // Stop scanning before initiating connect to reduce race conditions
-            stopScan()
-            connectingIds.insert(peripheral.identifier)
-            connect(peripheral)
-        }
-    }
-
-    func centralManager(_ central: CBCentralManager, didConnect peripheral: CBPeripheral) {
-        connected = peripheral
-        peripheral.delegate = self
-        append("connected")
-        // Auto discover services upon connect
-        peripheral.discoverServices(nil)
-    }
-
-    func centralManager(_ central: CBCentralManager, didDisconnectPeripheral peripheral: CBPeripheral, error: Error?) {
-        if let e = error { append("disconnected error: \(e.localizedDescription)") } else { append("disconnected") }
-        if connected?.identifier == peripheral.identifier { connected = nil }
-        connectingIds.remove(peripheral.identifier)
-    }
-
-    func centralManager(_ central: CBCentralManager, didFailToConnect peripheral: CBPeripheral, error: Error?) {
-        if let e = error { append("failToConnect: \(e.localizedDescription)") } else { append("failToConnect (no error)") }
-        connectingIds.remove(peripheral.identifier)
-    }
-
-    func peripheral(_ peripheral: CBPeripheral, didDiscoverServices error: Error?) {
-        guard let services = peripheral.services else { return }
-        services.forEach { s in
-            append("service \(s.uuid.uuidString)")
-            peripheral.discoverCharacteristics(nil, for: s)
-        }
-    }
-
-    func peripheral(_ peripheral: CBPeripheral, didDiscoverCharacteristicsFor service: CBService, error: Error?) {
-        let txStr = txUUIDString.trimmingCharacters(in: .whitespacesAndNewlines)
-        let rxStr = rxUUIDString.trimmingCharacters(in: .whitespacesAndNewlines)
-        let txUUID: CBUUID? = txStr.isEmpty ? nil : CBUUID(string: txStr)
-        let rxUUID: CBUUID? = rxStr.isEmpty ? nil : CBUUID(string: rxStr)
-        service.characteristics?.forEach { ch in
-            append("char \(service.uuid.uuidString) -> \(ch.uuid.uuidString)")
-            if let u = txUUID, ch.uuid == u { txChar = ch }
-            if let u = rxUUID, ch.uuid == u { rxChar = ch; peripheral.setNotifyValue(true, for: ch) }
-            if !discoveredCharacteristics.contains(where: { $0.uuid == ch.uuid }) {
-                discoveredCharacteristics.append(ch)
-            }
-        }
-        append("chars ready")
-        // After first batch of characteristics, auto-pick TX/RX and enable notifications
-        ensureTXRXSelectedIfPossible()
-        enableAllNotifications()
-        if autoUnlockOnConnect {
-            // Trigger unlock shortly after discovery to give notifications time to arm
-            DispatchQueue.main.asyncAfter(deadline: .now() + 0.15) {
-                self.send(action: "Unlock")
-            }
-        }
-    }
-
-    func peripheral(_ peripheral: CBPeripheral, didUpdateValueFor characteristic: CBCharacteristic, error: Error?) {
-        guard let v = characteristic.value else { return }
-        append("notify \(v.hexString())")
-    }
-}
-
-private extension Data {
-    init(hexString: String) {
-        let clean = hexString.replacingOccurrences(of: " ", with: "").replacingOccurrences(of: "0x", with: "").replacingOccurrences(of: ",", with: "")
-        var bytes: [UInt8] = []
-        var i = clean.startIndex
-        while i < clean.endIndex {
-            let j = clean.index(i, offsetBy: 2, limitedBy: clean.endIndex) ?? clean.endIndex
-            let b = String(clean[i..<j])
-            if let v = UInt8(b, radix: 16) { bytes.append(v) }
-            i = j
-        }
-        self.init(bytes)
-    }
-    func hexString() -> String {
-        map { String(format: "%02X", $0) }.joined()
-    }
-}

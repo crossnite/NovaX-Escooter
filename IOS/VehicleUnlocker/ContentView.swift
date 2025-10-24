@@ -1,5 +1,6 @@
 import SwiftUI
 import CoreBluetooth
+import UIKit
 
 struct ContentView: View {
     @StateObject var ble = BLEManager()
@@ -7,163 +8,266 @@ struct ContentView: View {
 
     var body: some View {
         NavigationView {
-            List {
-                Section("Target") {
-                    TextField("Auto-connect name contains", text: $ble.targetNameContains)
-                        .textFieldStyle(.roundedBorder)
-                        .autocorrectionDisabled(true)
-                        .textInputAutocapitalization(.never)
-                    Toggle("Auto Unlock on Connect", isOn: $ble.autoUnlockOnConnect)
-                    Toggle("Auto Connect on Scan", isOn: $ble.autoConnectEnabled)
-                }
-                Section("Devices") {
-                    HStack {
-                        TextField("Optional scan filter (Service UUID)", text: $scanningFilter)
-                            .textFieldStyle(.roundedBorder)
-                        Button(ble.isScanning ? "Stop" : "Scan") {
-                            if ble.isScanning { ble.stopScan() } else { ble.startScan(serviceFilter: scanningFilter) }
-                        }
-                        .buttonStyle(.borderedProminent)
-                    }
-                    if ble.devices.isEmpty {
-                        Text("No devices yet. Tap Scan.")
+            ScrollView {
+                VStack(spacing: UIDevice.current.userInterfaceIdiom == .pad ? 32 : 20) {
+                    // Header Section
+                    VStack(alignment: .leading, spacing: 8) {
+                        Text("Vehicle Control")
+                            .font(.system(size: UIDevice.current.userInterfaceIdiom == .pad ? 40 : 34))
+                            .fontWeight(.bold)
+                        Text("Connect and control your vehicle")
+                            .font(.system(size: UIDevice.current.userInterfaceIdiom == .pad ? 20 : 17))
                             .foregroundColor(.secondary)
                     }
-                    ForEach(ble.devices, id: \.identifier) { p in
+                    .frame(maxWidth: .infinity, alignment: .leading)
+                    .padding(.horizontal, UIDevice.current.userInterfaceIdiom == .pad ? 32 : 20)
+
+                    // Device Scanning Section
+                    VStack(spacing: 16) {
                         HStack {
-                            VStack(alignment: .leading, spacing: 4) {
-                                Text(p.name ?? "Unknown")
-                                    .font(.headline)
-                                Text(p.identifier.uuidString.prefix(8) + "…")
-                                    .font(.caption)
-                                    .foregroundColor(.secondary)
-                            }
-                            Spacer()
-                            Text("RSSI \(ble.rssiMap[p.identifier] ?? 0)")
-                                .font(.caption)
-                                .foregroundColor(.secondary)
-                            Button("Connect") { ble.connect(p) }
-                                .buttonStyle(.bordered)
-                        }
-                    }
-                }
+                            TextField("Service UUID Filter (Optional)", text: $scanningFilter)
+                                .textFieldStyle(.roundedBorder)
+                                .autocorrectionDisabled(true)
+                                .textInputAutocapitalization(.never)
 
-                Section("Connected") {
-                    if let c = ble.connected {
-                        VStack(alignment: .leading, spacing: 8) {
-                            Text(c.name ?? "Unknown")
-                                .font(.headline)
-                            Text(c.identifier.uuidString)
-                                .font(.caption)
-                                .foregroundColor(.secondary)
-                            HStack {
-                                Button("Discover Service(s)") { ble.discover() }
-                                    .buttonStyle(.borderedProminent)
-                                Button("Enable Notifications") { ble.enableAllNotifications() }
-                                    .buttonStyle(.bordered)
-                                Button("Disconnect") { ble.disconnect() }
-                                    .buttonStyle(.bordered)
-                            }
-                        }
-                    } else {
-                        Text("Not connected")
-                            .foregroundColor(.secondary)
-                    }
-                }
-
-                Section("Characteristics") {
-                    if ble.discoveredCharacteristics.isEmpty {
-                        Text("Run Discover to list characteristics.")
-                            .foregroundColor(.secondary)
-                    } else {
-                        ForEach(ble.discoveredCharacteristics, id: \.uuid.uuidString) { ch in
-                            HStack {
-                                VStack(alignment: .leading) {
-                                    Text(ch.uuid.uuidString).font(.footnote)
-                                    Text(propsString(ch.properties))
-                                        .font(.caption2).foregroundColor(.secondary)
+                            Button(ble.isScanning ? "Stop" : "Scan") {
+                                if ble.isScanning {
+                                    ble.stopScan()
+                                } else {
+                                    ble.startScan(serviceFilter: scanningFilter.isEmpty ? nil : scanningFilter)
                                 }
-                                Spacer()
-                                Button("Set TX") { ble.setTX(uuid: ch.uuid.uuidString) }
-                                    .buttonStyle(.bordered)
-                                Button("Set RX") { ble.setRX(uuid: ch.uuid.uuidString) }
-                                    .buttonStyle(.bordered)
                             }
+                            .buttonStyle(.borderedProminent)
+                            .frame(width: 80)
                         }
-                        if !ble.selectedTXUUID.isEmpty || !ble.selectedRXUUID.isEmpty {
-                            VStack(alignment: .leading, spacing: 4) {
-                                if !ble.selectedTXUUID.isEmpty { Text("TX: \(ble.selectedTXUUID)").font(.caption) }
-                                if !ble.selectedRXUUID.isEmpty { Text("RX: \(ble.selectedRXUUID)").font(.caption) }
+                        .padding(.horizontal, UIDevice.current.userInterfaceIdiom == .pad ? 32 : 20)
+
+                        if ble.devices.isEmpty {
+                            EmptyStateView(
+                                icon: "antenna.radiowaves.left.and.right",
+                                title: "No Devices Found",
+                                description: "Tap Scan to search for nearby Bluetooth devices"
+                            )
+                        } else {
+                            LazyVGrid(columns: [GridItem(.adaptive(minimum: UIDevice.current.userInterfaceIdiom == .pad ? 400 : 300))], spacing: 16) {
+                                ForEach(ble.devices, id: \.identifier) { device in
+                                    DeviceCard(device: device, rssi: ble.rssiMap[device.identifier] ?? 0, bleManager: ble)
+                                }
                             }
+                            .padding(.horizontal, UIDevice.current.userInterfaceIdiom == .pad ? 32 : 20)
                         }
                     }
-                }
 
-                Section("Actions") {
-                    if !ble.isConnected {
-                        Text("Connect to a device to use actions.")
-                            .foregroundColor(.secondary)
+                    // Connection Status Section
+                    if let connected = ble.connected {
+                        ConnectionCard(device: connected, bleManager: ble)
+                    } else {
+                        EmptyStateView(
+                            icon: "link",
+                            title: "Not Connected",
+                            description: "Connect to a device to control your vehicle"
+                        )
                     }
-                    VStack(spacing: 12) {
-                        HStack {
-                            Button("Unlock") { ble.send(action: "Unlock") }
-                                .buttonStyle(.borderedProminent)
-                                .disabled(!ble.isConnected)
-                            Button("Lock") { ble.send(action: "Lock") }
-                                .buttonStyle(.bordered)
-                                .disabled(!ble.isConnected)
-                        }
-                        HStack {
-                            Button("Lights On") { ble.send(action: "LightsOn") }
-                                .buttonStyle(.bordered)
-                                .disabled(!ble.isConnected)
-                            Button("Lights Off") { ble.send(action: "LightsOff") }
-                                .buttonStyle(.bordered)
-                                .disabled(!ble.isConnected)
-                        }
-                        HStack {
-                            Button("Horn") { ble.send(action: "Horn") }
-                                .buttonStyle(.bordered)
-                                .disabled(!ble.isConnected)
-                            Button("Ping") { ble.send(action: "Ping") }
-                                .buttonStyle(.bordered)
-                                .disabled(!ble.isConnected)
-                        }
-                    }
-                }
 
-                Section("Logs") {
-                    HStack {
-                        Button("Clear Logs") { ble.clearLogs() }
-                            .buttonStyle(.bordered)
-                        Spacer()
-                        Text("\\(ble.logs.count) entries")
-                            .font(.caption)
-                            .foregroundColor(.secondary)
+                    // Actions Section
+                    if ble.isConnected {
+                        ActionsCard(bleManager: ble)
                     }
-                    ForEach(ble.logs.indices, id: \.self) { i in
-                        Text(ble.logs[i])
-                            .font(.footnote)
-                            .textSelection(.enabled)
+
+                    // Logs Section
+                    if !ble.logs.isEmpty {
+                        LogsCard(logs: ble.logs, clearLogs: { ble.clearLogs() })
                     }
+
+                    Spacer()
+                }
+                .padding(.vertical, UIDevice.current.userInterfaceIdiom == .pad ? 32 : 20)
+            }
+            .background(Color(.systemGroupedBackground))
+            .navigationTitle("")
+            .toolbar {
+                ToolbarItem(placement: .principal) {
+                    Text("Vehicle Control")
+                        .font(.headline)
                 }
             }
-            .listStyle(.insetGrouped)
-            .navigationTitle("Vehicle Unlocker")
         }
+        .navigationViewStyle(.stack)
     }
 }
 
-private func propsString(_ p: CBCharacteristicProperties) -> String {
-    var parts: [String] = []
-    if p.contains(.read) { parts.append("read") }
-    if p.contains(.write) { parts.append("write") }
-    if p.contains(.writeWithoutResponse) { parts.append("writeNR") }
-    if p.contains(.notify) { parts.append("notify") }
-    if p.contains(.indicate) { parts.append("indicate") }
-    if p.contains(.broadcast) { parts.append("broadcast") }
-    if p.contains(.authenticatedSignedWrites) { parts.append("signed") }
-    if p.contains(.extendedProperties) { parts.append("extended") }
-    return parts.joined(separator: ", ")
+struct DeviceCard: View {
+    let device: CBPeripheral
+    let rssi: Int
+    let bleManager: BLEManager
+
+    var body: some View {
+        VStack(alignment: .leading, spacing: 12) {
+            HStack {
+                VStack(alignment: .leading, spacing: 4) {
+                    Text(device.name ?? "Unknown Device")
+                        .font(.headline)
+                        .lineLimit(1)
+                    Text(device.identifier.uuidString.prefix(8) + "...")
+                        .font(.caption)
+                        .foregroundColor(.secondary)
+                }
+                Spacer()
+                Text("RSSI: \(rssi)")
+                    .font(.caption2)
+                    .foregroundColor(.secondary)
+            }
+
+            Button("Connect") {
+                bleManager.connect(device)
+            }
+            .buttonStyle(.bordered)
+            .frame(maxWidth: .infinity)
+        }
+        .padding()
+        .background(Color(.secondarySystemGroupedBackground))
+        .cornerRadius(12)
+        .shadow(color: Color.black.opacity(0.1), radius: 2, x: 0, y: 1)
+    }
+}
+
+struct ConnectionCard: View {
+    let device: CBPeripheral
+    let bleManager: BLEManager
+
+    var body: some View {
+        VStack(spacing: 16) {
+            HStack {
+                Image(systemName: "checkmark.circle.fill")
+                    .foregroundColor(.green)
+                    .font(.title2)
+                VStack(alignment: .leading, spacing: 4) {
+                    Text("Connected")
+                        .font(.headline)
+                    Text(device.name ?? "Unknown Device")
+                        .font(.subheadline)
+                        .foregroundColor(.secondary)
+                }
+                Spacer()
+            }
+
+            HStack(spacing: 12) {
+                Button("Discover Services") {
+                    bleManager.discover()
+                }
+                .buttonStyle(.bordered)
+
+                Button("Enable Notifications") {
+                    bleManager.enableAllNotifications()
+                }
+                .buttonStyle(.bordered)
+
+                Button("Disconnect") {
+                    bleManager.disconnect()
+                }
+                .buttonStyle(.bordered)
+                .foregroundColor(.red)
+            }
+        }
+        .padding()
+        .background(Color(.secondarySystemGroupedBackground))
+        .cornerRadius(12)
+        .shadow(color: Color.black.opacity(0.1), radius: 2, x: 0, y: 1)
+        .padding(.horizontal, UIDevice.current.userInterfaceIdiom == .pad ? 32 : 20)
+    }
+}
+
+struct ActionsCard: View {
+    let bleManager: BLEManager
+
+    var body: some View {
+        VStack(spacing: 16) {
+            Text("Vehicle Actions")
+                .font(.headline)
+
+            HStack(spacing: 16) {
+                Button("Unlock") {
+                    bleManager.send(action: "Unlock")
+                }
+                .buttonStyle(.borderedProminent)
+                .frame(maxWidth: .infinity)
+
+                Button("Lock") {
+                    bleManager.send(action: "Lock")
+                }
+                .buttonStyle(.bordered)
+                .frame(maxWidth: .infinity)
+            }
+        }
+        .padding()
+        .background(Color(.secondarySystemGroupedBackground))
+        .cornerRadius(12)
+        .shadow(color: Color.black.opacity(0.1), radius: 2, x: 0, y: 1)
+        .padding(.horizontal, UIDevice.current.userInterfaceIdiom == .pad ? 32 : 20)
+    }
+}
+
+struct LogsCard: View {
+    let logs: [String]
+    let clearLogs: () -> Void
+
+    var body: some View {
+        VStack(alignment: .leading, spacing: 16) {
+            HStack {
+                Text("Activity Logs")
+                    .font(.headline)
+                Spacer()
+                Button("Clear") {
+                    clearLogs()
+                }
+                .buttonStyle(.bordered)
+                .foregroundColor(.red)
+            }
+
+            ScrollView {
+                VStack(alignment: .leading, spacing: 8) {
+                    ForEach(logs.indices, id: \.self) { index in
+                        Text(logs[index])
+                            .font(.caption)
+                            .foregroundColor(.secondary)
+                            .frame(maxWidth: .infinity, alignment: .leading)
+                            .padding(.vertical, 4)
+                            .padding(.horizontal, 8)
+                            .background(Color(.tertiarySystemGroupedBackground))
+                            .cornerRadius(6)
+                    }
+                }
+            }
+            .frame(height: 150)
+        }
+        .padding()
+        .background(Color(.secondarySystemGroupedBackground))
+        .cornerRadius(12)
+        .shadow(color: Color.black.opacity(0.1), radius: 2, x: 0, y: 1)
+        .padding(.horizontal, UIDevice.current.userInterfaceIdiom == .pad ? 32 : 20)
+    }
+}
+
+struct EmptyStateView: View {
+    let icon: String
+    let title: String
+    let description: String
+
+    var body: some View {
+        VStack(spacing: 12) {
+            Image(systemName: icon)
+                .font(.system(size: 48))
+                .foregroundColor(.secondary)
+            Text(title)
+                .font(.headline)
+                .foregroundColor(.primary)
+            Text(description)
+                .font(.subheadline)
+                .foregroundColor(.secondary)
+                .multilineTextAlignment(.center)
+        }
+        .frame(maxWidth: .infinity)
+        .padding(.vertical, 40)
+    }
 }
 
