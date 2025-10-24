@@ -216,7 +216,6 @@ class BLEManager: NSObject, ObservableObject {
     }
 
     private func append(_ s: String) { logs.append(s) }
-}
 
 extension BLEManager: CBCentralManagerDelegate, CBPeripheralDelegate {
     func centralManagerDidUpdateState(_ central: CBCentralManager) {
