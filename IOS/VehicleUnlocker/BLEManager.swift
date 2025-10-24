@@ -214,8 +214,7 @@ class BLEManager: NSObject, ObservableObject {
         }
         append("notifications enabled where available")
     }
-
-    private func append(_ s: String) { logs.append(s) }
+}
 
 extension BLEManager: CBCentralManagerDelegate, CBPeripheralDelegate {
     func centralManagerDidUpdateState(_ central: CBCentralManager) {
