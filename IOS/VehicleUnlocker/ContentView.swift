@@ -204,7 +204,7 @@ struct ActionsCard: View {
                     bleManager.send(action: "UnlockDirect")
                 }
                 .buttonStyle(.borderedProminent)
-                .foregroundColor(.orange)
+                .foregroundColor(.green)
                 .frame(maxWidth: .infinity)
 
                 Button("Test LFC") {

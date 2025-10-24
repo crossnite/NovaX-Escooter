@@ -81,43 +81,34 @@ class BLEManager: NSObject, ObservableObject {
         ensureTXRXSelectedIfPossible()
         switch name {
         case "Unlock":
-            // Sequence derived from frames 730–748
-            // 1) AT+OKFCG=OKAI_CAR,0,0,1,0024$\r\n
-            writeAscii("AT+OKFCG=OKAI_CAR,0,0,1,0024$\r\n", withResponse: true)
-            // 2) AT+OKXWM=OKAI_CAR,1,0004$\r\n (frame 737)
-            DispatchQueue.main.asyncAfter(deadline: .now() + 0.10) {
-                self.writeAscii("AT+OKXWM=OKAI_CAR,1,0004$\r\n", withResponse: true)
-            }
-            // 3) AT+OKLFC=OKAI_CAR,0,1,1,1,1,0,1,1,0,0,2,0,ES520A-BT,1,0,0,0024$\r\n (frame 742) - FIXED: parameter 6 should be 1 for unlock
-            DispatchQueue.main.asyncAfter(deadline: .now() + 0.20) {
-                self.writeAscii("AT+OKLFC=OKAI_CAR,0,1,1,1,1,0,1,1,0,0,2,0,ES520A-BT,1,0,0,0024$\r\n", withResponse: true)
-            }
-            // 4) AT+OKXWM=OKAI_CAR,0,0003$\r\n (frame 748)
-            DispatchQueue.main.asyncAfter(deadline: .now() + 0.30) {
-                self.writeAscii("AT+OKXWM=OKAI_CAR,0,0003$\r\n", withResponse: true)
-                self.append("action: Unlock sequence sent")
-            }
-        case "Lock":
-            // Exact lock sequence from OnlyLocking.txt: OKXWM=1,0004 then OKXWM=0,0003
+            // Sequence derived from frames 730–748 - CORRECTED BASED ON ACTUAL BEHAVIOR
+            // Based on OnlyLocking.txt: 1=unlock, 0=lock (opposite of what was assumed)
             writeAscii("AT+OKXWM=OKAI_CAR,1,0004$\r\n", withResponse: true)
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
                 self.writeAscii("AT+OKXWM=OKAI_CAR,0,0003$\r\n", withResponse: true)
-                self.append("action: Lock sent (XWM=1->0)")
+                self.append("action: Unlock sent (XWM=1->0)")
+            }
+        case "Lock":
+            // Simple direct lock - just send the lock command
+            writeAscii("AT+OKXWM=OKAI_CAR,0,0004$\r\n", withResponse: true)
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
+                self.writeAscii("AT+OKXWM=OKAI_CAR,1,0003$\r\n", withResponse: true)
+                self.append("action: Lock sent (XWM=0->1)")
             }
         case "SendOKFCG":
             writeAscii("AT+OKFCG=OKAI_CAR,0,0,1,0024$\r\n", withResponse: true)
         case "SendXWM1":
-            writeAscii("AT+OKXWM=OKAI_CAR,1,0004$\r\n", withResponse: true)
+            writeAscii("AT+OKXWM=OKAI_CAR,1,0004$\r\n", withResponse: true)  // Unlock
         case "SendLFC":
             writeAscii("AT+OKLFC=OKAI_CAR,0,1,1,1,1,0,1,1,0,0,2,0,ES520A-BT,1,0,0,0024$\r\n", withResponse: true)
         case "SendXWM0":
-            writeAscii("AT+OKXWM=OKAI_CAR,0,0003$\r\n", withResponse: true)
+            writeAscii("AT+OKXWM=OKAI_CAR,0,0003$\r\n", withResponse: true)  // Lock
         case "UnlockDirect":
             // Direct unlock command - try this if the sequence doesn't work
-            writeAscii("AT+OKXWM=OKAI_CAR,0,0003$\r\n", withResponse: true)
+            writeAscii("AT+OKXWM=OKAI_CAR,1,0004$\r\n", withResponse: true)
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
-                self.writeAscii("AT+OKLFC=OKAI_CAR,0,1,1,1,1,0,1,1,0,0,2,0,ES520A-BT,1,0,0,0024$\r\n", withResponse: true)
-                self.append("action: Direct unlock sent")
+                self.writeAscii("AT+OKXWM=OKAI_CAR,0,0003$\r\n", withResponse: true)
+                self.append("action: Direct unlock sent (XWM=1->0)")
             }
         default:
             append("action: \(name) (unknown)")
