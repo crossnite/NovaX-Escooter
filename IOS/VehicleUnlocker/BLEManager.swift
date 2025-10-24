@@ -98,15 +98,27 @@ class BLEManager: NSObject, ObservableObject {
                 self.append("action: Unlock sequence sent")
             }
         case "Lock":
-            // Based on detailed analysis of OnlyLocking.txt:
-            // The sequence shows OKXWM=1,0004 followed by OKXWM=0,0003
-            // But the ACK response shows OKXWM=1,0,0003 which suggests the lock command is OKXWM=1,0,0003
-            append("Starting lock sequence analysis...")
-            // Try the sequence from OnlyLocking.txt: first OKXWM=1,0004, then OKXWM=0,0003
-            writeAscii("AT+OKXWM=OKAI_CAR,1,0004$\r\n", withResponse: true)
-            DispatchQueue.main.asyncAfter(deadline: .now() + 0.16) {
-                self.writeAscii("AT+OKXWM=OKAI_CAR,0,0003$\r\n", withResponse: true)
-                self.append("Lock sequence sent: OKXWM=1,0004 -> OKXWM=0,0003")
+            // EXACT sequence from OnlyLocking.txt analysis:
+            // Frame 795: OKFCG=0,0,1,0024 -> ACK:OKFCG=0,1,1,1,3,0,1,1,0,0,2,0,ES520A-BT,1,0024
+            // Frame 802: OKXWM=1,0004 -> ACK:OKXWM=1,1,0004
+            // Frame 811: OKLFC=0,1,1,1,3,0,1,1,0,0,2,0,ES520A-BT,1,0,0,0026 -> ACK:OKLFC=0,1,1,1,1,0,1,1,0,0,2,0,ES520A-BT,1,0024
+            // Frame 825: OKXWM=0,0003 -> ACK:OKXWM=1,0,0003
+            append("Starting COMPLETE lock sequence from OnlyLocking.txt...")
+
+            // 1) OKFCG (Frame 795)
+            writeAscii("AT+OKFCG=OKAI_CAR,0,0,1,0024$\r\n", withResponse: true)
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.06) {
+                // 2) OKXWM=1,0004 (Frame 802)
+                self.writeAscii("AT+OKXWM=OKAI_CAR,1,0004$\r\n", withResponse: true)
+                DispatchQueue.main.asyncAfter(deadline: .now() + 0.11) {
+                    // 3) OKLFC (Frame 811)
+                    self.writeAscii("AT+OKLFC=OKAI_CAR,0,1,1,1,3,0,1,1,0,0,2,0,ES520A-BT,1,0,0,0026$\r\n", withResponse: true)
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.15) {
+                        // 4) OKXWM=0,0003 (Frame 825)
+                        self.writeAscii("AT+OKXWM=OKAI_CAR,0,0003$\r\n", withResponse: true)
+                        self.append("Lock sequence completed: OKFCG -> OKXWM=1,0004 -> OKLFC -> OKXWM=0,0003")
+                    }
+                }
             }
         case "SendOKFCG":
             writeAscii("AT+OKFCG=OKAI_CAR,0,0,1,0024$\r\n", withResponse: true)
