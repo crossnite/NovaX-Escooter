@@ -88,9 +88,9 @@ class BLEManager: NSObject, ObservableObject {
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.10) {
                 self.writeAscii("AT+OKXWM=OKAI_CAR,1,0004$\r\n", withResponse: true)
             }
-            // 3) AT+OKLFC=OKAI_CAR,0,1,1,1,3,0,1,1,0,0,2,0,ES520A-BT,1,0,0,0026$\r\n (frame 742)
+            // 3) AT+OKLFC=OKAI_CAR,0,1,1,1,1,0,1,1,0,0,2,0,ES520A-BT,1,0,0,0024$\r\n (frame 742) - FIXED: parameter 6 should be 1 for unlock
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.20) {
-                self.writeAscii("AT+OKLFC=OKAI_CAR,0,1,1,1,3,0,1,1,0,0,2,0,ES520A-BT,1,0,0,0026$\r\n", withResponse: true)
+                self.writeAscii("AT+OKLFC=OKAI_CAR,0,1,1,1,1,0,1,1,0,0,2,0,ES520A-BT,1,0,0,0024$\r\n", withResponse: true)
             }
             // 4) AT+OKXWM=OKAI_CAR,0,0003$\r\n (frame 748)
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.30) {
@@ -109,9 +109,16 @@ class BLEManager: NSObject, ObservableObject {
         case "SendXWM1":
             writeAscii("AT+OKXWM=OKAI_CAR,1,0004$\r\n", withResponse: true)
         case "SendLFC":
-            writeAscii("AT+OKLFC=OKAI_CAR,0,1,1,1,3,0,1,1,0,0,2,0,ES520A-BT,1,0,0,0026$\r\n", withResponse: true)
+            writeAscii("AT+OKLFC=OKAI_CAR,0,1,1,1,1,0,1,1,0,0,2,0,ES520A-BT,1,0,0,0024$\r\n", withResponse: true)
         case "SendXWM0":
             writeAscii("AT+OKXWM=OKAI_CAR,0,0003$\r\n", withResponse: true)
+        case "UnlockDirect":
+            // Direct unlock command - try this if the sequence doesn't work
+            writeAscii("AT+OKXWM=OKAI_CAR,0,0003$\r\n", withResponse: true)
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
+                self.writeAscii("AT+OKLFC=OKAI_CAR,0,1,1,1,1,0,1,1,0,0,2,0,ES520A-BT,1,0,0,0024$\r\n", withResponse: true)
+                self.append("action: Direct unlock sent")
+            }
         default:
             append("action: \(name) (unknown)")
         }
