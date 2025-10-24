@@ -197,22 +197,6 @@ struct ActionsCard: View {
                 .buttonStyle(.bordered)
                 .frame(maxWidth: .infinity)
             }
-
-            // Alternative unlock options
-            HStack(spacing: 16) {
-                Button("Direct Unlock") {
-                    bleManager.send(action: "UnlockDirect")
-                }
-                .buttonStyle(.borderedProminent)
-                .foregroundColor(.green)
-                .frame(maxWidth: .infinity)
-
-                Button("Test LFC") {
-                    bleManager.send(action: "SendLFC")
-                }
-                .buttonStyle(.bordered)
-                .frame(maxWidth: .infinity)
-            }
         }
         .padding()
         .background(Color(.secondarySystemGroupedBackground))
