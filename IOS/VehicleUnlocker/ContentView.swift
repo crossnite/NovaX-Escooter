@@ -1,6 +1,5 @@
 import SwiftUI
 import CoreBluetooth
-import UIKit
 
 struct ContentView: View {
     @StateObject var ble = BLEManager()
@@ -9,18 +8,18 @@ struct ContentView: View {
     var body: some View {
         NavigationView {
             ScrollView {
-                VStack(spacing: UIDevice.current.userInterfaceIdiom == .pad ? 32 : 20) {
+                VStack(spacing: 20) {
                     // Header Section
                     VStack(alignment: .leading, spacing: 8) {
                         Text("Vehicle Control")
-                            .font(.system(size: UIDevice.current.userInterfaceIdiom == .pad ? 40 : 34))
+                            .font(.largeTitle)
                             .fontWeight(.bold)
                         Text("Connect and control your vehicle")
-                            .font(.system(size: UIDevice.current.userInterfaceIdiom == .pad ? 20 : 17))
+                            .font(.subheadline)
                             .foregroundColor(.secondary)
                     }
                     .frame(maxWidth: .infinity, alignment: .leading)
-                    .padding(.horizontal, UIDevice.current.userInterfaceIdiom == .pad ? 32 : 20)
+                    .padding(.horizontal)
 
                     // Device Scanning Section
                     VStack(spacing: 16) {
@@ -40,7 +39,7 @@ struct ContentView: View {
                             .buttonStyle(.borderedProminent)
                             .frame(width: 80)
                         }
-                        .padding(.horizontal, UIDevice.current.userInterfaceIdiom == .pad ? 32 : 20)
+                        .padding(.horizontal)
 
                         if ble.devices.isEmpty {
                             EmptyStateView(
@@ -49,12 +48,12 @@ struct ContentView: View {
                                 description: "Tap Scan to search for nearby Bluetooth devices"
                             )
                         } else {
-                            LazyVGrid(columns: [GridItem(.adaptive(minimum: UIDevice.current.userInterfaceIdiom == .pad ? 400 : 300))], spacing: 16) {
+                            LazyVGrid(columns: [GridItem(.adaptive(minimum: 300))], spacing: 12) {
                                 ForEach(ble.devices, id: \.identifier) { device in
                                     DeviceCard(device: device, rssi: ble.rssiMap[device.identifier] ?? 0, bleManager: ble)
                                 }
                             }
-                            .padding(.horizontal, UIDevice.current.userInterfaceIdiom == .pad ? 32 : 20)
+                            .padding(.horizontal)
                         }
                     }
 
@@ -81,7 +80,7 @@ struct ContentView: View {
 
                     Spacer()
                 }
-                .padding(.vertical, UIDevice.current.userInterfaceIdiom == .pad ? 32 : 20)
+                .padding(.vertical)
             }
             .background(Color(.systemGroupedBackground))
             .navigationTitle("")
@@ -173,7 +172,7 @@ struct ConnectionCard: View {
         .background(Color(.secondarySystemGroupedBackground))
         .cornerRadius(12)
         .shadow(color: Color.black.opacity(0.1), radius: 2, x: 0, y: 1)
-        .padding(.horizontal, UIDevice.current.userInterfaceIdiom == .pad ? 32 : 20)
+        .padding(.horizontal)
     }
 }
 
@@ -203,7 +202,7 @@ struct ActionsCard: View {
         .background(Color(.secondarySystemGroupedBackground))
         .cornerRadius(12)
         .shadow(color: Color.black.opacity(0.1), radius: 2, x: 0, y: 1)
-        .padding(.horizontal, UIDevice.current.userInterfaceIdiom == .pad ? 32 : 20)
+        .padding(.horizontal)
     }
 }
 
@@ -244,7 +243,7 @@ struct LogsCard: View {
         .background(Color(.secondarySystemGroupedBackground))
         .cornerRadius(12)
         .shadow(color: Color.black.opacity(0.1), radius: 2, x: 0, y: 1)
-        .padding(.horizontal, UIDevice.current.userInterfaceIdiom == .pad ? 32 : 20)
+        .padding(.horizontal)
     }
 }
 
@@ -269,5 +268,24 @@ struct EmptyStateView: View {
         .frame(maxWidth: .infinity)
         .padding(.vertical, 40)
     }
+}
+
+#Preview("iPhone") {
+    ContentView()
+        .previewDevice(PreviewDevice(rawValue: "iPhone 15"))
+        .previewDisplayName("iPhone 15")
+}
+
+#Preview("iPad") {
+    ContentView()
+        .previewDevice(PreviewDevice(rawValue: "iPad Pro (12.9-inch)"))
+        .previewDisplayName("iPad Pro 12.9\"")
+}
+
+#Preview("iPhone Landscape") {
+    ContentView()
+        .previewDevice(PreviewDevice(rawValue: "iPhone 15"))
+        .previewInterfaceOrientation(.landscapeLeft)
+        .previewDisplayName("iPhone 15 Landscape")
 }
 
