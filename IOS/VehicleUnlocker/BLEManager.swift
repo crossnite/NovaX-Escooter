@@ -19,6 +19,10 @@ class BLEManager: NSObject, ObservableObject {
     private var txChar: CBCharacteristic?
     private var rxChar: CBCharacteristic?
 
+    private func append(_ message: String) {
+        logs.append(message)
+    }
+
     override init() {
         super.init()
         central = CBCentralManager(delegate: self, queue: .main)
@@ -200,3 +204,94 @@ class BLEManager: NSObject, ObservableObject {
     }
 
     func enableAllNotifications() {
+        guard let p = connected else { return }
+        p.services?.forEach { s in
+            s.characteristics?.forEach { ch in
+                if ch.properties.contains(.notify) || ch.properties.contains(.indicate) {
+                    p.setNotifyValue(true, for: ch)
+                }
+            }
+        }
+        append("notifications enabled where available")
+    }
+
+    private func append(_ s: String) { logs.append(s) }
+}
+
+extension BLEManager: CBCentralManagerDelegate, CBPeripheralDelegate {
+    func centralManagerDidUpdateState(_ central: CBCentralManager) {
+        if central.state == .poweredOn { append("poweredOn") } else { append("state \(central.state.rawValue)") }
+    }
+
+    func centralManager(_ central: CBCentralManager, didDiscover peripheral: CBPeripheral, advertisementData: [String : Any], rssi RSSI: NSNumber) {
+        if !devices.contains(where: { $0.identifier == peripheral.identifier }) { devices.append(peripheral) }
+        rssiMap[peripheral.identifier] = RSSI.intValue
+    }
+
+    func centralManager(_ central: CBCentralManager, didConnect peripheral: CBPeripheral) {
+        connected = peripheral
+        peripheral.delegate = self
+        append("connected")
+        // Auto discover services upon connect
+        peripheral.discoverServices(nil)
+    }
+
+    func centralManager(_ central: CBCentralManager, didDisconnectPeripheral peripheral: CBPeripheral, error: Error?) {
+        if let e = error { append("disconnected error: \(e.localizedDescription)") } else { append("disconnected") }
+        if connected?.identifier == peripheral.identifier { connected = nil }
+    }
+
+    func centralManager(_ central: CBCentralManager, didFailToConnect peripheral: CBPeripheral, error: Error?) {
+        if let e = error { append("failToConnect: \(e.localizedDescription)") } else { append("failToConnect (no error)") }
+    }
+
+    func peripheral(_ peripheral: CBPeripheral, didDiscoverServices error: Error?) {
+        guard let services = peripheral.services else { return }
+        services.forEach { s in
+            append("service \(s.uuid.uuidString)")
+            peripheral.discoverCharacteristics(nil, for: s)
+        }
+    }
+
+    func peripheral(_ peripheral: CBPeripheral, didDiscoverCharacteristicsFor service: CBService, error: Error?) {
+        let txStr = txUUIDString.trimmingCharacters(in: .whitespacesAndNewlines)
+        let rxStr = rxUUIDString.trimmingCharacters(in: .whitespacesAndNewlines)
+        let txUUID: CBUUID? = txStr.isEmpty ? nil : CBUUID(string: txStr)
+        let rxUUID: CBUUID? = rxStr.isEmpty ? nil : CBUUID(string: rxStr)
+        service.characteristics?.forEach { ch in
+            append("char \(service.uuid.uuidString) -> \(ch.uuid.uuidString)")
+            if let u = txUUID, ch.uuid == u { txChar = ch }
+            if let u = rxUUID, ch.uuid == u { rxChar = ch; peripheral.setNotifyValue(true, for: ch) }
+            if !discoveredCharacteristics.contains(where: { $0.uuid == ch.uuid }) {
+                discoveredCharacteristics.append(ch)
+            }
+        }
+        append("chars ready")
+        // After first batch of characteristics, auto-pick TX/RX and enable notifications
+        ensureTXRXSelectedIfPossible()
+        enableAllNotifications()
+    }
+
+    func peripheral(_ peripheral: CBPeripheral, didUpdateValueFor characteristic: CBCharacteristic, error: Error?) {
+        guard let v = characteristic.value else { return }
+        append("notify \(v.hexString())")
+    }
+}
+
+private extension Data {
+    init(hexString: String) {
+        let clean = hexString.replacingOccurrences(of: " ", with: "").replacingOccurrences(of: "0x", with: "").replacingOccurrences(of: ",", with: "")
+        var bytes: [UInt8] = []
+        var i = clean.startIndex
+        while i < clean.endIndex {
+            let j = clean.index(i, offsetBy: 2, limitedBy: clean.endIndex) ?? clean.endIndex
+            let b = String(clean[i..<j])
+            if let v = UInt8(b, radix: 16) { bytes.append(v) }
+            i = j
+        }
+        self.init(bytes)
+    }
+    func hexString() -> String {
+        map { String(format: "%02X", $0) }.joined()
+    }
+}
